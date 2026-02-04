@@ -96,6 +96,10 @@ uv run cxr_test_1.py
 
 ```
 
+Output should be:
+
+![Terminal Screenshot of CXR Analysis](assets/output_v1.png)
+
 ### **Summary of Imports**
 
 * **`mlx-vlm`**: Provides the `load` and `generate` functions optimized for Apple Metal.
