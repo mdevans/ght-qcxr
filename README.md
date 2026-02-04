@@ -1,4 +1,11 @@
 Here is the step-by-step guide to initializing your **ght-qcxr** project with `uv` and VSCode on your Mac 
+### **Step 0: Download MedGemma Model with Vision - instruction trained 4b parameters 8 bit quantised
+
+Use your web browser to download all the files from: https://huggingface.co/mlx-community/medgemma-1.5-4b-it-8bit/tree/main
+
+to path/to/ght-qcxr/medgemma_vision
+
+This model was converted to MLX format from google/medgemma-1.5-4b-it using mlx-vlm version 0.3.9.
 
 ### **Step 1: Initialize the Project & Environment**
 
