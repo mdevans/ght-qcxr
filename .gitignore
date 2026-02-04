@@ -1,0 +1,20 @@
+# --- Python & Environment ---
+__pycache__/
+*.py[cod]
+.venv/
+.env
+
+# --- Model Weights (Huge files) ---
+medgemma_vision/
+*.safetensors
+*.bin
+
+# --- Medical Data (PRIVACY CRITICAL) ---
+cxr/*.dcm
+*.dcm
+*.dicom
+
+# --- Mac System Files ---
+.DS_Store
+
+# --- Logs ---
