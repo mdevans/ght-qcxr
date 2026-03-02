@@ -6,13 +6,20 @@ __pycache__/
 
 # --- Model Weights (Huge files) ---
 medgemma_vision/
+medsiglip-vision-v1/
+medsiglip-google-448/
 *.safetensors
 *.bin
+models/*
+segment/*
 
 # --- Medical Data (PRIVACY CRITICAL) ---
 cxr/*.dcm
+cxr/padchest
 *.dcm
 *.dicom
+*.jpg
+data/*
 
 # --- Mac System Files ---
 .DS_Store

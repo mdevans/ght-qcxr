@@ -1,0 +1,51 @@
+google/medgemma-1.5-4b-it
+
+1. Technique & Quality:
+
+Projection: PA
+Inspiration: Good
+Exposure: Adequate
+Rotation: Appears relatively straight.
+
+2. Findings:
+
+Lungs: Bilateral diffuse, small nodular opacities, more prominent in the right upper lobe and left lower lobe. Left lower lobe consolidation. No pneumothorax.
+Pleura: No effusion or thickening.
+Heart & Mediastinum: Normal heart size. Normal mediastinal width. Normal hilar contours.
+Bones & Soft Tissue: No rib fractures.
+Diaphragm: Normal contour.
+
+3. Impression:
+
+Diffuse bilateral nodular opacities and left lower lobe consolidation. Findings are concerning for an underlying interstitial lung disease or widespread infectious process.
+
+4. Recommendations:
+
+CT scan of the chest is recommended for further characterization of the lung findings.
+Clinical correlation is essential.
+
+Review and Refine: Read through the generated report to ensure it's clear, concise, accurate, and follows the requested format. Ensure the language is appropriate for a medical report. The impression should be concise and highlight the most important findings. The recommendations should be actionable.
+
+1. Technique & Quality
+
+Projection: PA (Posterior-Anterior)
+Inspiration: Good
+Exposure: Adequate
+Rotation: Appears relatively straight.
+
+2. Findings
+
+Lungs: Bilateral diffuse, small nodular opacities are present throughout both lung fields. The opacities appear more prominent in the right upper lobe and left lower lobe. There is a more significant area of consolidation/opacity in the left lower lobe. No pneumothorax is identified.
+Pleura: No evidence of pleural effusion or thickening.
+Heart & Mediastinum: The cardiac silhouette appears within normal limits. The mediastinal width is normal. Hilar contours are unremarkable.
+Bones & Soft Tissue: No obvious rib fractures or significant soft tissue abnormalities.
+Diaphragm: The diaphragmatic contours appear normal.
+
+3. Impression
+
+Diffuse bilateral nodular opacities and left lower lobe consolidation. Findings are concerning for an underlying interstitial lung disease or widespread infectious process.
+
+4. Recommendations
+
+CT scan of the chest is recommended for further characterization of the lung findings.
+Clinical correlation is essential.

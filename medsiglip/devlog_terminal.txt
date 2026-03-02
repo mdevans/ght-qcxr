@@ -1,0 +1,1032 @@
+Error on 5e090548-ef77ac78-163e3d3a-631945b4-48c11893: Error -3 while decompressing data: invalid stored block lengths
+Error on 1627e0a2-6f42c1c7-9b4ca942-91783fdd-48e55099: Error -3 while decompressing data: invalid stored block lengths
+Error on 4da76917-b5fadfda-dda46a56-1d4374b7-df6fe17b: Error -3 while decompressing data: invalid stored block lengths
+Error on ae714546-087eb4d4-b252cba2-c8b11959-d55228b9: Error -3 while decompressing data: invalid stored block lengths
+Error on f3d62d76-c3936a8e-68cb9db0-7656f4d3-5cd90e71: Error -3 while decompressing data: invalid stored block lengths
+Error on 608bb941-dec0366a-eb93953c-e9df7806-60372c0b: Error -3 while decompressing data: invalid stored block lengths
+Error on f06390d3-59f5a4c2-a67d0c20-4d7f0260-97063698: Error -3 while decompressing data: invalid stored block lengths
+Error on 9ff20517-146e8ba4-73219914-66e5c295-0d6fc9f0: Error -3 while decompressing data: invalid stored block lengths
+Error on 0e103b3e-f7016f06-a64aac19-89e2b684-f5116101: Error -3 while decompressing data: invalid stored block lengths
+Error on 2fae8f22-fe9f7035-f92e19cd-53b0cd39-4ed29655: Error -3 while decompressing data: invalid stored block lengths
+Error on dac4fb68-cb3b59fa-da14eaa4-6dcba318-281ef277: Error -3 while decompressing data: invalid stored block lengths
+⠇ Saved data/LAT_CXR_DX_448/849fd183-f0ffd040-34a7aa1b-861c3ff0-4c0578ea.png ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╺━━━━━━  83%
+
+✅ Done: Images in: data/LAT_CXR_DX_448
+(ght-qcxr) michaelevans@Michaels-Mac-mini ght-qcxr % uv run get_images_orthanc.py
+🏥 Orthanc Processor -> MedSigLIP Ready (448px)
+{
+    'ApiVersion': 18,
+    'CheckRevisions': False,
+    'DatabaseBackendPlugin': '/Users/user/orthanc_PROD/libOrthancPostgreSQLIndex.dylib',
+    'DatabaseServerIdentifier': '226e6bed-3c3b798c-0a801dc4-7b3ce441-55326b07',
+    'DatabaseVersion': 6,
+    'DicomAet': 'AR1_DX_LIFE',
+    'DicomPort': 4242,
+    'HttpPort': 8090,
+    'IngestTranscoding': '',
+    'IsHttpServerSecure': True,
+    'MainDicomTags': {
+        'Instance': '0008,0012;0008,0013;0008,0018;0020,0012;0020,0013;0020,0032;0020,0037;0020,0100;0020,4000;0028,0008;0054,1330',
+        'Patient': '0010,0010;0010,0020;0010,0030;0010,0040;0010,1000',
+        'Series': '0008,0021;0008,0031;0008,0060;0008,0070;0008,1010;0008,103e;0008,1070;0018,0010;0018,0015;0018,0024;0018,1030;0018,1090;0018,1400;0020,000e;0020,0011;0020,0037;0020,0105;0020,1002;0040,0254;0054,0081;0054,0101;0054,1000',
+        'Study': '0008,0020;0008,0030;0008,0050;0008,0080;0008,0090;0008,1030;0020,000d;0020,0010;0032,1032;0032,1060'
+    },
+    'Name': 'AR1.DX.LIFE',
+    'OverwriteInstances': False,
+    'PluginsEnabled': True,
+    'StorageAreaPlugin': None,
+    'StorageCompression': True,
+    'Version': '1.11.1'
+}
+✅ Connected to Orthanc
+🔍 Searching PACS...
+{'Modality': 'DX', 'BodyPartExamined': 'CHEST', 'SeriesDescription': 'CHEST LAT'}
+   Found 100 series matching query. (Limit: 100)
+   Download & Process 100 instances.
+Error on ceb91c4f-2a63bb57-c6bc075e-fb2f9ad1-dfea70fa: Error -3 while decompressing data: invalid stored block lengths
+Error on 1b531ae8-f22e1552-f1157a9c-e91c1d64-47ea522e: Error -3 while decompressing data: invalid stored block lengths
+Error on edd58883-8f50bdda-4c4e6146-c0153a0e-1058c9de: Error -3 while decompressing data: invalid stored block lengths
+Error on 5704f1ae-a5e8ec03-a57a3d20-79fa21be-4bae1322: Error -3 while decompressing data: invalid stored block lengths
+Error on 9256bda9-5b4396bf-865699fc-c3d8f855-7cbb75d8: Error -3 while decompressing data: invalid stored block lengths
+Error on 0000e90f-6d4f5352-e5b78765-9bbaba96-c65e67ab: Error -3 while decompressing data: invalid stored block lengths
+Error on 20f7a858-183ec21e-4624ac2c-0b55d277-8002562e: Error -3 while decompressing data: invalid stored block lengths
+Error on c2335e9d-adc68d73-240daae5-8b7506fc-909e1342: HTTP code: 404, with content: 
+Error on 59451a3e-9ae87b29-15272d9f-e6a32f2e-236cf4d7: Error -3 while decompressing data: invalid stored block lengths
+Error on 3955433c-c327ef43-e78a7608-a82acdc9-e40365ce: Error -3 while decompressing data: invalid stored block lengths
+Error on 61f4aa78-18f2023a-7d229b8e-8dfae780-39b7f54a: Error -3 while decompressing data: invalid stored block lengths
+Error on 723281b3-ff2d9f0d-07dee68c-de31aadf-793f34aa: Error -3 while decompressing data: invalid stored block lengths
+Error on 65647dfd-9c37c7d9-9df7d59c-b67f4663-938d3b9f: HTTP code: 404, with content: 
+Error on 76bdb183-06ca05f1-b9a05be3-9f666f41-c3b627e8: HTTP code: 404, with content: 
+Error on dc91837f-8569935e-d21cb2b7-d536a159-63cf3eab: HTTP code: 404, with content: 
+Error on 5e28a60e-bd9bd58a-7fa9d830-9ca3d717-911cada3: Error -3 while decompressing data: invalid stored block lengths
+Error on 814fd574-5a221f06-e88dde9a-80b04405-1410bcae: HTTP code: 404, with content: 
+Error on eb0c5aef-af0d34ef-a942ea59-9e0b3c02-92feab61: HTTP code: 404, with content: 
+Error on d5ce5206-4703e9fc-5bff3d74-e5faa2fa-0e80d207: Error -3 while decompressing data: invalid stored block lengths
+Error on df891db7-fb0313dc-0cb515c8-b66d5a51-43fbe405: HTTP code: 404, with content: 
+Error on 76aed9fc-c3dce114-6e4757f4-217ea42b-2b9fbf5a: Error -3 while decompressing data: invalid stored block lengths
+Error on 7a4d2e7f-790cf9da-cc6ad4f6-6a8f1ce0-69ff1347: HTTP code: 404, with content: 
+⠋ Saved data/LAT_CXR_448/d42931c6-e7ce2106-fdfa750d-d24ad95c-28bd5db2.png ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╺━━━━━━━━  78%
+
+✅ Done: Images in: data/LAT_CXR_448
+(ght-qcxr) michaelevans@Michaels-Mac-mini ght-qcxr % uv run get_images_orthanc.py
+🏥 Orthanc Processor -> MedSigLIP Ready (448px)
+{
+    'ApiVersion': 18,
+    'CheckRevisions': False,
+    'DatabaseBackendPlugin': '/Users/user/orthanc_PROD/libOrthancPostgreSQLIndex.dylib',
+    'DatabaseServerIdentifier': '226e6bed-3c3b798c-0a801dc4-7b3ce441-55326b07',
+    'DatabaseVersion': 6,
+    'DicomAet': 'AR1_DX_LIFE',
+    'DicomPort': 4242,
+    'HttpPort': 8090,
+    'IngestTranscoding': '',
+    'IsHttpServerSecure': True,
+    'MainDicomTags': {
+        'Instance': '0008,0012;0008,0013;0008,0018;0020,0012;0020,0013;0020,0032;0020,0037;0020,0100;0020,4000;0028,0008;0054,1330',
+        'Patient': '0010,0010;0010,0020;0010,0030;0010,0040;0010,1000',
+        'Series': '0008,0021;0008,0031;0008,0060;0008,0070;0008,1010;0008,103e;0008,1070;0018,0010;0018,0015;0018,0024;0018,1030;0018,1090;0018,1400;0020,000e;0020,0011;0020,0037;0020,0105;0020,1002;0040,0254;0054,0081;0054,0101;0054,1000',
+        'Study': '0008,0020;0008,0030;0008,0050;0008,0080;0008,0090;0008,1030;0020,000d;0020,0010;0032,1032;0032,1060'
+    },
+    'Name': 'AR1.DX.LIFE',
+    'OverwriteInstances': False,
+    'PluginsEnabled': True,
+    'StorageAreaPlugin': None,
+    'StorageCompression': True,
+    'Version': '1.11.1'
+}
+✅ Connected to Orthanc
+🔍 Searching PACS...
+{'Modality': 'DX', 'BodyPartExamined': 'CHEST', 'SeriesDescription': 'CHEST PA'}
+   Found 100 series matching query. (Limit: 100)
+   Download & Process 103 instances.
+Error on 47053f0e-2809dfda-7de331cf-a1bc0ff8-8bc6eb5f: HTTP code: 404, with content: 
+Error on 7da9fbe1-1a2d0630-6afc2d7c-2c621e62-74e63d19: HTTP code: 404, with content: 
+Error on 1e715c5f-57cf1a9d-7f340f8a-36b6c164-d9293c3d: HTTP code: 404, with content: 
+Error on 50a554c2-773946f1-2f6167dc-2d5c216e-8e4b10bf: Error -3 while decompressing data: invalid stored block lengths
+Error on ebe8ebcc-518316bf-c58225a3-4d3d657a-40b6b39a: Error -3 while decompressing data: invalid stored block lengths
+Error on 81154a6a-dda58bb2-4dff06d9-4f45c168-4b1b3e6f: unsupported operand type(s) for *: 'float' and 'NoneType'
+Error on f152a1ea-0e5b3a8c-307f31bb-a3debf7e-9438be20: HTTP code: 404, with content: 
+Error on 77ad7555-9daa1c45-7db214f5-c944395d-1076c114: HTTP code: 404, with content: 
+Error on a7f45d42-50dbe6b4-d46633d3-6067fff3-c5440c09: HTTP code: 404, with content: 
+Error on 466fa456-03cbc4b7-4b520cb6-9834aca7-f2ffef61: HTTP code: 404, with content: 
+Error on 39bb3f7b-91f41aa9-d99ba8d8-5b70ab25-e71b0cde: HTTP code: 404, with content: 
+Error on 1544d845-c7b18bc0-3ecd14a6-bced4b65-6f55b257: HTTP code: 404, with content: 
+Error on d89b8c79-59be9fc5-d5b39a5c-c6a35328-b0b965bf: HTTP code: 404, with content: 
+Error on 0b11e5ce-ed41489b-69332552-efcf200f-876f49d3: HTTP code: 404, with content: 
+Error on 500540de-6d83a0df-7214a100-d75f340e-95908e5b: HTTP code: 404, with content: 
+Error on 92418bc7-311e3f2b-c49f4d78-fad9df35-1f9ee85b: HTTP code: 404, with content: 
+Error on 1c3e14a9-a5139d09-f744c9ae-87168cd4-7f4b1adc: HTTP code: 404, with content: 
+Error on c022151c-4ea2cc3b-5dd5d7f6-fc0fcd34-09f52e64: HTTP code: 404, with content: 
+Error on 383336be-ec4d8867-5de87766-21d016c5-b1c533d7: HTTP code: 404, with content: 
+Error on 0437faf3-5e541a27-d9b0f6ff-ba1e18f2-8c809aae: HTTP code: 404, with content: 
+Error on 104bc376-1a99cbee-f9611be8-11ab45c2-82120bef: HTTP code: 404, with content: 
+Error on ba0295b2-ca0f098b-27f3eefe-0d84544f-3c3601d1: HTTP code: 404, with content: 
+Error on 569c59c6-baae2114-bb921f98-785737e8-b00c0ee3: HTTP code: 404, with content: 
+Error on 76d51632-c550d81b-3e57f1c3-f909f9aa-7eb39988: HTTP code: 404, with content: 
+Error on 459bbc35-f2a44bbb-4bf97020-534e08b8-5f09d405: unsupported operand type(s) for *: 'float' and 'NoneType'
+Error on a9011962-1910e5a2-c145c388-84bbb159-426ae3dc: HTTP code: 404, with content: 
+Error on a1e8c8d5-b5701e6e-ee60d59a-b48670e4-410cdd21: HTTP code: 404, with content: 
+Error on 24597150-432c1a26-77ebffcd-582be01c-7212a6fb: HTTP code: 404, with content: 
+Error on df166c11-94a2c466-8cb391cc-d4b4d713-52e5f36f: HTTP code: 404, with content: 
+Error on 9ffdd67d-0151e612-0480a6ee-5a242ea6-c0fdc927: HTTP code: 404, with content: 
+Error on d08621bb-758f0354-e8e89903-e7489559-554bf174: HTTP code: 404, with content: 
+Error on 5db1874d-b86eff9e-9a0e483f-697dfc68-9eee4819: HTTP code: 404, with content: 
+Error on 3da84a13-b38e1993-b7052c8e-adc1f534-c5ab6594: HTTP code: 404, with content: 
+Error on cb004c0b-178770f8-efa395e6-3c3618b4-7e157fd3: HTTP code: 404, with content: 
+Error on b69c1ab2-3063b49a-cc25aede-7630daf6-f762fc35: HTTP code: 404, with content: 
+Error on 14dffba3-b92bce20-6efef9a2-6e03b476-af4e129f: HTTP code: 404, with content: 
+Error on 3912ea93-4a4395f5-629374ca-30098d83-93a5ef28: HTTP code: 404, with content: 
+Error on ca28466c-c4c41710-ead713c1-5e7f3f60-167637bd: HTTP code: 404, with content: 
+Error on e81e219f-26ff857c-5017751a-67106d37-4da0d36f: HTTP code: 404, with content: 
+Error on 8b12acc4-c23a0a07-3766ad0f-47e37127-c3a80d30: HTTP code: 404, with content: 
+Error on ba83f95d-d8567cf1-d7b39c82-cdae7577-8a2311e7: HTTP code: 404, with content: 
+Error on bc75015f-3ebcbd22-dcdbe880-1f789340-71ad293e: HTTP code: 404, with content: 
+Error on 459f8c47-78b741f5-efaa1123-e82ca0d8-e5ec12eb: HTTP code: 404, with content: 
+Error on 4065900f-76021034-fe4b2c00-2aca119d-c08c422f: HTTP code: 404, with content: 
+Error on 294871db-c5fafd09-9fb3aae7-a4941124-d5e55644: HTTP code: 404, with content: 
+Error on 2007787b-8111fc3a-7a743d03-ccf38529-3df3bbde: HTTP code: 404, with content: 
+Error on 618db70f-ce71eb7d-487b1463-f00155b7-8c8b15d1: HTTP code: 404, with content: 
+Error on e26bf536-729d06b2-2bbe8a0c-e7ffe6b2-000e41e0: HTTP code: 404, with content: 
+Error on bc1f60ea-0549a22b-2a497fc1-f7bfda99-825d8d00: HTTP code: 404, with content: 
+Error on 91f92f99-56882d7f-af3cba2b-a9cd9355-2ec82ea4: HTTP code: 404, with content: 
+Error on b9c17a74-3d8148c5-b799093d-fc741b2b-47282543: HTTP code: 404, with content: 
+Error on 02eab67e-42e219e5-b925ed96-2e2f1587-d962c40b: HTTP code: 404, with content: 
+Error on 9e026fdc-9a86d14b-b3dcee17-f782a69b-54681560: HTTP code: 404, with content: 
+Error on de10073d-d2cd131e-8bc69655-ba65e5e5-78b5abc1: HTTP code: 404, with content: 
+Error on 30d99a7b-28faa8f9-5059b290-77bd4f36-51751d98: HTTP code: 404, with content: 
+Error on 5822870b-b745b95e-7b0229a7-4901b589-8e83d846: HTTP code: 404, with content: 
+Error on 4e03be7b-c7ec2447-2f2111ed-995a4df2-b1914ca0: HTTP code: 404, with content: 
+Error on d01c5b6c-efe2f2d8-9a7e2442-628a8ee7-6bbc8cc4: HTTP code: 404, with content: 
+Error on 581d6b9d-bdbeb828-5251069d-58619c27-5b0271e7: HTTP code: 404, with content: 
+Error on 8029260b-6ef37865-2a69d80e-118f0a94-cd456afe: HTTP code: 404, with content: 
+Error on eff152a8-0799f8b5-6b6945ac-41704753-04798461: HTTP code: 404, with content: 
+Error on 51947a44-773eb9d9-29a2480d-5c65c9d4-d10b4a94: HTTP code: 404, with content: 
+Error on eb91ac06-84a36ef4-a0653818-b861113b-057219d0: HTTP code: 404, with content: 
+Error on 81281666-5521b7e9-e210d5b8-abda4c35-bf009ee5: HTTP code: 404, with content: 
+Error on 60390d76-9e6f6fe1-e57b29b2-30fbc81a-2cff727c: HTTP code: 404, with content: 
+Error on 9c5efaa7-57fd7caf-84c68f01-e9d1dbfd-05857bf7: HTTP code: 404, with content: 
+Error on 1d21fcd8-ae46733f-013e8207-aeb8864e-31e118b5: HTTP code: 404, with content: 
+Error on ff074717-5ac3ea26-a9aa3884-20a92812-46dc86d2: HTTP code: 404, with content: 
+Error on d02a94b4-b45d46bf-c0b7b0ac-49005da1-0b5172f9: HTTP code: 404, with content: 
+Error on db15205a-eac08871-f084ccca-aa0a8fb0-0297565a: HTTP code: 404, with content: 
+Error on 19f56a00-a7f9cfc5-58490ff6-3e769838-224fe79a: HTTP code: 404, with content: 
+Error on 6b53bd28-90d0f82a-890a6500-6af039b5-e7e6f0f3: HTTP code: 404, with content: 
+Error on aaa39405-781dc3d0-1a2d5535-33619eb1-8dbdae28: HTTP code: 404, with content: 
+Error on 59d127da-babef4bc-5f4c1897-d276f49e-b4df1473: unsupported operand type(s) for *: 'float' and 'NoneType'
+Error on bc2055fc-b8922e98-7439fa0c-2f6c20d7-03f09859: HTTP code: 404, with content: 
+Error on 24d72901-2c508ca9-c506aba5-6fcdb4b1-696c59d9: HTTP code: 404, with content: 
+Error on 6eeca432-4a8f38e0-b6d82a42-bfc906a0-a164c171: HTTP code: 404, with content: 
+Error on d8a67df1-b5ab9193-64e807c8-6e5f14bd-44cb41d9: HTTP code: 404, with content: 
+Error on a46f0cdb-fec2c02f-847d4b22-9a31ac9d-837f03dc: HTTP code: 404, with content: 
+Error on 2584878c-1f76d676-ac25d1aa-4b9bf691-cb55ce51: HTTP code: 404, with content: 
+Error on d230bd81-e72c79e8-cb4051b1-0e529619-f82ff1c4: HTTP code: 404, with content: 
+Error on e867abbc-67a54310-c984abd4-2dafc077-60786bc3: HTTP code: 404, with content: 
+Error on e010cf8d-7b0760b2-268867dd-a853b31b-7fd12015: HTTP code: 404, with content: 
+Error on 09051be1-70aa51db-dd24fd14-f1fc2328-d24cff6a: Error -3 while decompressing data: invalid stored block lengths
+Error on e4ba20d7-95af5c2d-414b5e57-b2678aa3-19cef586: HTTP code: 404, with content: 
+Error on 629b7665-8d3b6c49-1ce2844c-9359fb37-bb1d0913: HTTP code: 404, with content: 
+Error on 508909db-16ff12fb-972eae58-749ae8f2-644cf17c: HTTP code: 404, with content: 
+Error on 4f450af3-57352630-9b098273-1dc8b378-29f14a11: HTTP code: 404, with content: 
+Error on 914b35d5-a75fb7df-6c0b09fe-2f71a627-14e24835: HTTP code: 404, with content: 
+Error on ebbfbb3c-a76166b5-56ee20f3-f61befba-d9d78eba: HTTP code: 404, with content: 
+Error on 985773d1-a15f6185-3cb5dd7b-0074ffb5-f2199937: HTTP code: 404, with content: 
+Error on 3f22639e-c3833acc-a048d05c-205dc568-f3600972: HTTP code: 404, with content: 
+Error on 81f9da20-7cf31642-25491854-43591d68-26bc0ef2: HTTP code: 404, with content: 
+Error on 8aa6fea0-4099c095-d2b71ef7-3ec39247-f9b88b36: HTTP code: 404, with content: 
+Error on 9622cb7d-48232579-c2dee92a-17366e8f-e3ec2de0: Error -3 while decompressing data: invalid stored block lengths
+Error on 331e5eb7-dd535030-080f9ac7-53282778-6a638fd0: HTTP code: 404, with content: 
+Error on c4f86baf-7b7216c1-d4c99f50-5793a1a1-40a18b89: HTTP code: 404, with content: 
+Error on 5f124583-dcfe09d0-7503d176-1dec4cae-6a9a2427: HTTP code: 404, with content: 
+Error on e59fb9bc-13732255-4ff6b08b-b50051f8-3ba02483: HTTP code: 404, with content: 
+Error on b0ee5942-0d5fb0cf-20b0cec2-c6d397f4-79c3ad3d: HTTP code: 404, with content: 
+⠏ Saved data/PA_CXR_448/f1b30841-f6dee6f5-9c71ccb6-359075a2-d2182b7c.png ━╺━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━   3%
+
+✅ Done: Images in: data/PA_CXR_448
+(ght-qcxr) michaelevans@Michaels-Mac-mini ght-qcxr % uv run get_images_orthanc.py
+🏥 Orthanc Processor -> MedSigLIP Ready (448px)
+{
+    'ApiVersion': 18,
+    'CheckRevisions': False,
+    'DatabaseBackendPlugin': '/Users/user/orthanc_PROD/libOrthancPostgreSQLIndex.dylib',
+    'DatabaseServerIdentifier': '226e6bed-3c3b798c-0a801dc4-7b3ce441-55326b07',
+    'DatabaseVersion': 6,
+    'DicomAet': 'AR1_DX_LIFE',
+    'DicomPort': 4242,
+    'HttpPort': 8090,
+    'IngestTranscoding': '',
+    'IsHttpServerSecure': True,
+    'MainDicomTags': {
+        'Instance': '0008,0012;0008,0013;0008,0018;0020,0012;0020,0013;0020,0032;0020,0037;0020,0100;0020,4000;0028,0008;0054,1330',
+        'Patient': '0010,0010;0010,0020;0010,0030;0010,0040;0010,1000',
+        'Series': '0008,0021;0008,0031;0008,0060;0008,0070;0008,1010;0008,103e;0008,1070;0018,0010;0018,0015;0018,0024;0018,1030;0018,1090;0018,1400;0020,000e;0020,0011;0020,0037;0020,0105;0020,1002;0040,0254;0054,0081;0054,0101;0054,1000',
+        'Study': '0008,0020;0008,0030;0008,0050;0008,0080;0008,0090;0008,1030;0020,000d;0020,0010;0032,1032;0032,1060'
+    },
+    'Name': 'AR1.DX.LIFE',
+    'OverwriteInstances': False,
+    'PluginsEnabled': True,
+    'StorageAreaPlugin': None,
+    'StorageCompression': True,
+    'Version': '1.11.1'
+}
+✅ Connected to Orthanc
+🔍 Searching PACS...
+{'Modality': 'CR', 'BodyPartExamined': 'CHEST', 'SeriesDescription': 'CHEST PA'}
+   Found 100 series matching query. (Limit: 100)
+   Download & Process 102 instances.
+Error on 0690382e-01872fec-3e10949e-0db1998b-e1cddeb1: HTTP code: 404, with content: 
+Error on bce02bf5-0882afd1-18e5feb6-a338eb42-23708830: HTTP code: 404, with content: 
+Error on ed27625f-a9ca0da9-ef6eb919-2e52fd28-bf828a3d: Error -3 while decompressing data: invalid stored block lengths
+Error on 8d2d02c7-4a47bc37-04b6e63b-d406017e-4abdd7d9: Error -3 while decompressing data: invalid stored block lengths
+Error on 3b89a32c-f7a66a21-824c7382-ab64058b-8aa7c0ca: HTTP code: 404, with content: 
+Error on 16aa6655-653db51a-6cd07ee9-f68adba2-a1384909: Error -3 while decompressing data: invalid stored block lengths
+Error on 72ab7772-a832d0a8-49202260-ce5232b1-2c5bbdab: Error -3 while decompressing data: invalid stored block lengths
+Error on a58d2c15-1f889a44-3b0b3824-739a938f-121f20c9: HTTP code: 404, with content: 
+Error on 64656776-37977dfc-823da835-0636cb5d-861a9de5: HTTP code: 404, with content: 
+Error on 01dbbb63-e029feb9-f3902524-ed18cb3d-0fe79253: Error -3 while decompressing data: invalid stored block lengths
+Error on 1e42c3ec-e83fbd7d-f47e80c7-e2f787b4-9b02b519: Error -3 while decompressing data: invalid stored block lengths
+Error on 5c49afa6-be01e815-816fd157-3e6f379a-f62ad852: Error -3 while decompressing data: invalid stored block lengths
+Error on 76b6911d-0c57670f-0f4c9844-27eaa6c9-c3d81484: Error -3 while decompressing data: invalid stored block lengths
+Error on 32c86a46-f530a816-fd671048-37393e52-08c578ee: HTTP code: 404, with content: 
+Error on cd54ee22-56186787-e432891f-e20f650f-3d1c2fbb: HTTP code: 404, with content: 
+Error on 9140a3d7-07816b23-eb9052ed-d1458c32-ed157b50: Error -3 while decompressing data: invalid stored block lengths
+Error on 084153d4-e156c265-31c6ff2c-c223015d-254e8a37: Error -3 while decompressing data: invalid stored block lengths
+Error on dd91c523-2ff0c022-6c800949-e17298b8-578626ea: Error -3 while decompressing data: invalid stored block lengths
+Error on a237b4c1-fa1a959c-37e6cb04-ca13dee1-373c38fe: Error -3 while decompressing data: invalid stored block lengths
+⠙ Saved data/PA_CXR_448/d8d1b901-69c2b144-5e0a1caa-5ee7867f-742f3c5c.png ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╸━━━━━━━  81%
+
+✅ Done: Images in: data/PA_CXR_448
+(ght-qcxr) michaelevans@Michaels-Mac-mini ght-qcxr % uv run get_images_orthanc.py
+🏥 Orthanc Processor -> MedSigLIP Ready (448px)
+{
+    'ApiVersion': 18,
+    'CheckRevisions': False,
+    'DatabaseBackendPlugin': '/Users/trauma/orthanc_PROD/libOrthancPostgreSQLIndex.dylib',
+    'DatabaseServerIdentifier': 'a45bff5f-30fbdb78-f467ce85-727367c9-2d6ade43',
+    'DatabaseVersion': 6,
+    'DicomAet': 'AR2_DX_LIFE',
+    'DicomPort': 4242,
+    'HttpPort': 8090,
+    'IngestTranscoding': '',
+    'IsHttpServerSecure': True,
+    'MainDicomTags': {
+        'Instance': '0008,0012;0008,0013;0008,0018;0020,0012;0020,0013;0020,0032;0020,0037;0020,0100;0020,4000;0028,0008;0054,1330',
+        'Patient': '0010,0010;0010,0020;0010,0030;0010,0040;0010,1000',
+        'Series': '0008,0021;0008,0031;0008,0060;0008,0070;0008,1010;0008,103e;0008,1070;0018,0010;0018,0015;0018,0024;0018,1030;0018,1090;0018,1400;0020,000e;0020,0011;0020,0037;0020,0105;0020,1002;0040,0254;0054,0081;0054,0101;0054,1000',
+        'Study': '0008,0020;0008,0030;0008,0050;0008,0080;0008,0090;0008,1030;0020,000d;0020,0010;0032,1032;0032,1060'
+    },
+    'Name': 'AR2.DX.LIFE',
+    'OverwriteInstances': True,
+    'PluginsEnabled': True,
+    'StorageAreaPlugin': None,
+    'StorageCompression': True,
+    'Version': '1.11.2'
+}
+✅ Connected to Orthanc
+🔍 Searching PACS...
+{'Modality': 'DX', 'BodyPartExamined': 'CHEST', 'SeriesDescription': 'CHEST PA'}
+   Found 100 series matching query. (Limit: 100)
+   Download & Process 105 instances.
+Error on 2fda5af8-6731bd33-e945ce1f-041ca70d-c7774799: HTTP code: 404, with content: 
+Error on 63867cc6-b6953ffb-be131a5a-c626251d-80856bfa: HTTP code: 404, with content: 
+Error on 211090c2-82b2c3b0-c75fb20a-8198593f-bfc79c4a: HTTP code: 404, with content: 
+Error on d39bb45b-623a65f0-6de65fd0-8d942b48-e9fdbde6: HTTP code: 404, with content: 
+Error on e16f8b6a-1d686497-5f461468-2f47daa8-5162875b: HTTP code: 404, with content: 
+Error on 8319e6a9-54cfa1bc-bc779071-6b0d0eea-45f11d9b: HTTP code: 404, with content: 
+Error on 06061d81-1be143c2-fe4fa3bd-7e0591e5-a4fafd60: HTTP code: 404, with content: 
+Error on e9db92ee-e2eb1b6a-ddd22f98-220e4f88-4a8dc998: HTTP code: 404, with content: 
+Error on af5345a4-1bba4b6a-a689e193-1f2fe7e6-49e4e2fb: HTTP code: 404, with content: 
+Error on 2deafde0-863b1880-0657d42a-8ed389eb-0cf99fe9: HTTP code: 404, with content: 
+Error on c87df0bd-da748759-cedad573-096dcdaa-cb5a7b4d: HTTP code: 404, with content: 
+Error on 541b15a1-e7d632c7-6f854f1d-0d316bb0-401a1878: HTTP code: 404, with content: 
+Error on a3d555e4-a4cae626-5bf80be9-3fea8d96-3c30b845: HTTP code: 404, with content: 
+Error on 0f7f684c-4e230537-c18939f1-68c99afc-5ac72537: HTTP code: 404, with content: 
+Error on b170f692-8fdda6e2-0542a18d-cb81dbb1-ada144b8: HTTP code: 404, with content: 
+Error on 0d500d18-3b7ac720-d5648459-fad7f5b4-d5e4d244: HTTP code: 404, with content: 
+Error on 19e21501-71a26087-5c5e8bf7-a7d61021-37a41b15: HTTP code: 404, with content: 
+Error on d2d57a06-fdfb4e39-a1a4fe12-77f36066-8cda69ab: HTTP code: 404, with content: 
+Error on 43b0c436-20bf6cb5-77e935dc-c28cc5eb-8f6600f9: HTTP code: 404, with content: 
+Error on e6c9f67c-39982ddf-aae46bd4-d72355c1-ead32d79: HTTP code: 404, with content: 
+⠙ Saved data/PA_CXR_448/1439a46a-890c4bef-46330b9f-3f3d5e13-b16cfe58.png ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╺━━━━━━━  81%
+
+✅ Done: Images in: data/PA_CXR_448
+(ght-qcxr) michaelevans@Michaels-Mac-mini ght-qcxr % uv run medsiglip/cxr_anatomy_detect.py 
+🛠️  Manual Simple Pipeline (mps)
+Loading weights: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 888/888 [00:00<00:00, 3552.69it/s, Materializing param=vision_model.post_layernorm.weight]
+🧪 Running Inference...
+          Simple Pipeline Results          
+┏━━━━━━━━━━━━━━━━━━━┳━━━━━━━━┳━━━━━━━━━━━━┓
+┃ Class             ┃  Score ┃ Confidence ┃
+┡━━━━━━━━━━━━━━━━━━━╇━━━━━━━━╇━━━━━━━━━━━━┩
+│ Chest X-Ray       │  -8.70 │     56.72% │
+│ Abdominal X-Ray   │  -9.18 │     35.35% │
+│ Non-Medical Noise │ -10.67 │      7.93% │
+└───────────────────┴────────┴────────────┘
+(ght-qcxr) michaelevans@Michaels-Mac-mini ght-qcxr % uv run medsiglip/cxr_anatomy_detect.py
+🛠️  Manual Simple Pipeline (mps)
+Loading weights: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 888/888 [00:00<00:00, 4828.58it/s, Materializing param=vision_model.post_layernorm.weight]
+🧪 Running Inference...
+          Simple Pipeline Results          
+┏━━━━━━━━━━━━━━━━━━━┳━━━━━━━━┳━━━━━━━━━━━━┓
+┃ Class             ┃  Score ┃ Confidence ┃
+┡━━━━━━━━━━━━━━━━━━━╇━━━━━━━━╇━━━━━━━━━━━━┩
+│ Chest X-Ray       │  -8.70 │     56.72% │
+│ Abdominal X-Ray   │  -9.18 │     35.35% │
+│ Non-Medical Noise │ -10.67 │      7.93% │
+└───────────────────┴────────┴────────────┘
+(ght-qcxr) michaelevans@Michaels-Mac-mini ght-qcxr % uv run medsiglip/cxr_anatomy_detect.py
+🛠️  Manual Simple Pipeline (mps)
+Loading weights: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 888/888 [00:00<00:00, 4598.68it/s, Materializing param=vision_model.post_layernorm.weight]
+🧪 Running Inference...
+          Simple Pipeline Results          
+┏━━━━━━━━━━━━━━━━━━━┳━━━━━━━━┳━━━━━━━━━━━━┓
+┃ Class             ┃  Score ┃ Confidence ┃
+┡━━━━━━━━━━━━━━━━━━━╇━━━━━━━━╇━━━━━━━━━━━━┩
+│ Chest X-Ray       │  -8.70 │     69.42% │
+│ Extremities X-Ray │  -9.91 │     20.87% │
+│ Non-Medical Noise │ -10.67 │      9.70% │
+└───────────────────┴────────┴────────────┘
+(ght-qcxr) michaelevans@Michaels-Mac-mini ght-qcxr % uv run medsiglip/cxr_anatomy_detect.py
+🛠️  Manual Simple Pipeline (mps)
+Loading weights: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 888/888 [00:00<00:00, 5467.44it/s, Materializing param=vision_model.post_layernorm.weight]
+🧪 Running Inference...
+          Simple Pipeline Results          
+┏━━━━━━━━━━━━━━━━━━━┳━━━━━━━━┳━━━━━━━━━━━━┓
+┃ Class             ┃  Score ┃ Confidence ┃
+┡━━━━━━━━━━━━━━━━━━━╇━━━━━━━━╇━━━━━━━━━━━━┩
+│ Chest X-Ray       │  -8.70 │     69.86% │
+│ Skull X-Ray       │  -9.94 │     20.37% │
+│ Non-Medical Noise │ -10.67 │      9.76% │
+└───────────────────┴────────┴────────────┘
+(ght-qcxr) michaelevans@Michaels-Mac-mini ght-qcxr % uv run medsiglip/cxr_anatomy_detect.py
+🛠️  Manual Simple Pipeline (mps)
+Loading weights: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 888/888 [00:00<00:00, 4404.28it/s, Materializing param=vision_model.post_layernorm.weight]
+🧪 Running Inference...
+       Simple Pipeline Results       
+┏━━━━━━━━━━━━━┳━━━━━━━━┳━━━━━━━━━━━━┓
+┃ Class       ┃  Score ┃ Confidence ┃
+┡━━━━━━━━━━━━━╇━━━━━━━━╇━━━━━━━━━━━━┩
+│ Chest X-Ray │  -8.70 │     80.42% │
+│ Other       │ -10.12 │     19.58% │
+└─────────────┴────────┴────────────┘
+(ght-qcxr) michaelevans@Michaels-Mac-mini ght-qcxr % uv run medsiglip/cxr_anatomy_detect.py
+🛠️  Manual Simple Pipeline (mps)
+Loading weights: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 888/888 [00:00<00:00, 5345.05it/s, Materializing param=vision_model.post_layernorm.weight]
+🧪 Running Inference...
+         Simple Pipeline Results          
+┏━━━━━━━━━━━━━━━━━━━┳━━━━━━━┳━━━━━━━━━━━━┓
+┃ Class             ┃ Score ┃ Confidence ┃
+┡━━━━━━━━━━━━━━━━━━━╇━━━━━━━╇━━━━━━━━━━━━┩
+│ Chest X-Ray       │ -8.70 │     51.13% │
+│ Other X-Ray       │ -9.11 │     34.18% │
+│ Non-medical image │ -9.95 │     14.70% │
+└───────────────────┴───────┴────────────┘
+(ght-qcxr) michaelevans@Michaels-Mac-mini ght-qcxr % uv run medsiglip/cxr_anatomy_detect.py
+🛠️  Manual Simple Pipeline (mps)
+Loading weights: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 888/888 [00:00<00:00, 4837.21it/s, Materializing param=vision_model.post_layernorm.weight]
+🧪 Running Inference...
+         Simple Pipeline Results          
+┏━━━━━━━━━━━━━━━━━━━┳━━━━━━━┳━━━━━━━━━━━━┓
+┃ Class             ┃ Score ┃ Confidence ┃
+┡━━━━━━━━━━━━━━━━━━━╇━━━━━━━╇━━━━━━━━━━━━┩
+│ Chest X-Ray       │ -8.70 │     51.13% │
+│ Other X-Ray       │ -9.11 │     34.18% │
+│ Non-medical image │ -9.95 │     14.70% │
+└───────────────────┴───────┴────────────┘
+(ght-qcxr) michaelevans@Michaels-Mac-mini ght-qcxr % uv run medsiglip/cxr_anatomy_detect.py
+🛠️  Manual Simple Pipeline (mps)
+Loading weights: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 888/888 [00:00<00:00, 4873.26it/s, Materializing param=vision_model.post_layernorm.weight]
+🧪 Running Inference...
+       Simple Pipeline Results       
+┏━━━━━━━━━━━━━┳━━━━━━━━┳━━━━━━━━━━━━┓
+┃ Class       ┃  Score ┃ Confidence ┃
+┡━━━━━━━━━━━━━╇━━━━━━━━╇━━━━━━━━━━━━┩
+│ Chest X-Ray │  -8.70 │     80.42% │
+│ Other       │ -10.12 │     19.58% │
+└─────────────┴────────┴────────────┘
+(ght-qcxr) michaelevans@Michaels-Mac-mini ght-qcxr % uv run medsiglip/cxr_anatomy_detect.py
+🛠️  Manual Simple Pipeline (mps)
+Loading weights: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 888/888 [00:00<00:00, 5180.80it/s, Materializing param=vision_model.post_layernorm.weight]
+🧪 Running Inference...
+       Simple Pipeline Results       
+┏━━━━━━━━━━━━━┳━━━━━━━━┳━━━━━━━━━━━━┓
+┃ Class       ┃  Score ┃ Confidence ┃
+┡━━━━━━━━━━━━━╇━━━━━━━━╇━━━━━━━━━━━━┩
+│ Chest X-Ray │  -8.70 │     77.43% │
+│ Other       │ -10.12 │     18.85% │
+│ Knee X-Ray  │ -11.74 │      3.73% │
+└─────────────┴────────┴────────────┘
+(ght-qcxr) michaelevans@Michaels-Mac-mini ght-qcxr % uv run medsiglip/cxr_anatomy_detect.py
+🛠️  Manual Simple Pipeline (mps)
+Loading weights: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 888/888 [00:00<00:00, 4160.18it/s, Materializing param=vision_model.post_layernorm.weight]
+🧪 Running Inference...
+       Simple Pipeline Results       
+┏━━━━━━━━━━━━━┳━━━━━━━━┳━━━━━━━━━━━━┓
+┃ Class       ┃  Score ┃ Confidence ┃
+┡━━━━━━━━━━━━━╇━━━━━━━━╇━━━━━━━━━━━━┩
+│ Chest X-Ray │  -8.70 │     63.16% │
+│ Skull X-Ray │  -9.94 │     18.42% │
+│ Other       │ -10.12 │     15.38% │
+│ Knee X-Ray  │ -11.74 │      3.04% │
+└─────────────┴────────┴────────────┘
+(ght-qcxr) michaelevans@Michaels-Mac-mini ght-qcxr % uv run medsiglip/cxr_anatomy_detect.py
+🛠️  Manual Simple Pipeline (mps)
+Loading weights: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 888/888 [00:00<00:00, 4496.40it/s, Materializing param=vision_model.post_layernorm.weight]
+🧪 Running Inference...
+                 Simple Pipeline Results                  
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━┳━━━━━━━━━━━━┓
+┃ Class                             ┃ Score ┃ Confidence ┃
+┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━╇━━━━━━━━━━━━┩
+│ An posterior-anterior chest x-ray │ -7.85 │     40.22% │
+│ An anterior-posterior chest x-ray │ -8.09 │     31.73% │
+│ A lateral chest x-ray             │ -8.42 │     22.72% │
+│ A non-medical image               │ -9.87 │      5.34% │
+└───────────────────────────────────┴───────┴────────────┘
+(ght-qcxr) michaelevans@Michaels-Mac-mini ght-qcxr % uv run medsiglip/cxr_anatomy_detect.py
+🛠️  Manual Simple Pipeline (mps)
+Loading weights: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 888/888 [00:00<00:00, 4944.89it/s, Materializing param=vision_model.post_layernorm.weight]
+🧪 Running Inference...
+                  Simple Pipeline Results                  
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━┳━━━━━━━━━━━━┓
+┃ Class                             ┃  Score ┃ Confidence ┃
+┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━╇━━━━━━━━━━━━┩
+│ A lateral chest x-ray             │  -8.03 │     45.91% │
+│ An posterior-anterior chest x-ray │  -8.50 │     28.95% │
+│ An anterior-posterior chest x-ray │  -8.87 │     19.99% │
+│ A non-medical image               │ -10.22 │      5.15% │
+└───────────────────────────────────┴────────┴────────────┘
+(ght-qcxr) michaelevans@Michaels-Mac-mini ght-qcxr % uv run medsiglip/cxr_anatomy_detect.py
+🛠️  Manual Simple Pipeline (mps)
+Loading weights: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 888/888 [00:00<00:00, 3885.62it/s, Materializing param=vision_model.post_layernorm.weight]
+🧪 Running Inference...
+                 Simple Pipeline Results                  
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━┳━━━━━━━━━━━━┓
+┃ Class                             ┃ Score ┃ Confidence ┃
+┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━╇━━━━━━━━━━━━┩
+│ A lateral chest x-ray             │ -7.19 │     39.70% │
+│ An posterior-anterior chest x-ray │ -7.47 │     29.86% │
+│ An anterior-posterior chest x-ray │ -7.56 │     27.37% │
+│ A non-medical image               │ -9.75 │      3.07% │
+└───────────────────────────────────┴───────┴────────────┘
+(ght-qcxr) michaelevans@Michaels-Mac-mini ght-qcxr % uv run medsiglip/cxr_anatomy_detect.py
+🛠️  Manual Simple Pipeline (mps)
+Loading weights: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 888/888 [00:00<00:00, 4471.93it/s, Materializing param=vision_model.post_layernorm.weight]
+🧪 Running Inference...
+                 Simple Pipeline Results                  
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━┳━━━━━━━━━━━━┓
+┃ Class                             ┃ Score ┃ Confidence ┃
+┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━╇━━━━━━━━━━━━┩
+│ An anterior-posterior chest x-ray │ -7.30 │     40.64% │
+│ An posterior-anterior chest x-ray │ -7.34 │     38.89% │
+│ A lateral chest x-ray             │ -8.17 │     17.05% │
+│ A non-medical image               │ -9.77 │      3.41% │
+└───────────────────────────────────┴───────┴────────────┘
+(ght-qcxr) michaelevans@Michaels-Mac-mini ght-qcxr % uv run medsiglip/cxr_batch_classifier_1.py 
+🧪 MedSigLIP Batch Evaluator (mps)
+   Loading Model...
+Loading weights: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 888/888 [00:00<00:00, 4725.80it/s, Materializing param=vision_model.post_layernorm.weight]
+   Processing AP (249 images)...
+Evaluating AP... ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 100% 0:02:24
+   Processing PA (161 images)...
+Evaluating PA... ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 100% 0:01:36
+   Processing LAT (159 images)...
+Evaluating LAT... ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 100% 0:01:35
+
+
+                                MedSigLIP Zero-Shot Performance                                 
+┏━━━━━━━━━━━━━━┳━━━━━━━┳━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃ Class (True) ┃ Total ┃ Strict Acc % ┃ Frontal/Lat Acc % ┃ Confused With                      ┃
+┡━━━━━━━━━━━━━━╇━━━━━━━╇━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┩
+│ AP           │  249  │        60.6% │             98.8% │ posterior-anterior: 95, lateral: 3 │
+│ PA           │  161  │        82.6% │             96.3% │ lateral: 6, anterior-posterior: 22 │
+│ LAT          │  159  │        98.1% │             98.1% │ posterior-anterior: 3              │
+└──────────────┴───────┴──────────────┴───────────────────┴────────────────────────────────────┘
+
+Overall Strict Accuracy (AP vs PA vs LAT): 77.3%
+Overall Robust Accuracy (Frontal vs LAT):   97.9%
+Note: 'Strict' requires AP/PA distinction. 'Robust' groups AP+PA as Frontal.
+(ght-qcxr) michaelevans@Michaels-Mac-mini ght-qcxr % uv run medsiglip/cxr_batch_classifier_0.py
+🛡️  Safety Check: Is it a CXR? (mps)
+Loading weights: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 888/888 [00:00<00:00, 3774.52it/s, Materializing param=vision_model.post_layernorm.weight]
+Testing AP... ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 100% 0:00:11
+Testing PA... ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 100% 0:00:11
+Testing LAT... ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 100% 0:00:11
+Testing OTHER... ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━   0% -:--:--Error screenshot_text.png: The size of tensor a (9295) must match the size of tensor b (1024) at non-singleton dimension 1
+Testing OTHER... ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╺━━━━━━━━━  75% 0:00:02Error white.png: The size of tensor a (1056) must match the size of tensor b (1024) at non-singleton dimension 1
+Testing OTHER... ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 100% 0:00:03
+                                     Safety Gate Performance                                      
+┏━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━┳━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃ File Source         ┃ Result ┃ Confidence (CXR) ┃ Classified As                                ┃
+┡━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━╇━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┩
+│ AP/9c7830c5-8...    │  FAIL  │            33.7% │ An x-ray of a body part other than the chest │
+│ AP/ee1e9823-0...    │  FAIL  │            41.7% │ A chest x-ray                                │
+│ AP/d8772981-0...    │  FAIL  │            22.1% │ An x-ray of a body part other than the chest │
+│ AP/be1a10a3-6...    │  FAIL  │            32.8% │ An x-ray of a body part other than the chest │
+│ AP/1fd18414-8...    │  FAIL  │            46.4% │ A chest x-ray                                │
+│ AP/d9ac6f64-6...    │  FAIL  │            40.0% │ A chest x-ray                                │
+│ AP/44f52e20-a...    │  FAIL  │            34.3% │ An x-ray of a body part other than the chest │
+│ AP/f8826c44-1...    │  FAIL  │            43.2% │ A chest x-ray                                │
+│ AP/ca834dd6-7...    │  FAIL  │            25.1% │ An x-ray of a body part other than the chest │
+│ AP/9e4d67ee-b...    │  FAIL  │            40.6% │ An x-ray of a body part other than the chest │
+│ AP/b9dcc8c2-8...    │  FAIL  │            32.9% │ An x-ray of a body part other than the chest │
+│ AP/c9d38f09-1...    │  FAIL  │            36.3% │ An x-ray of a body part other than the chest │
+│ AP/7f514e11-5...    │  FAIL  │            33.8% │ An x-ray of a body part other than the chest │
+│ AP/733a539c-c...    │  FAIL  │            28.4% │ An x-ray of a body part other than the chest │
+│ AP/a4110bed-d...    │  FAIL  │            38.6% │ A chest x-ray                                │
+│ AP/036c34ff-4...    │  FAIL  │            38.1% │ An x-ray of a body part other than the chest │
+│ PA/77a72053-8...    │  FAIL  │            45.9% │ A chest x-ray                                │
+│ PA/6f2f54bb-6...    │  FAIL  │            46.6% │ A chest x-ray                                │
+│ PA/ed95f86e-7...    │  FAIL  │            39.8% │ An x-ray of a body part other than the chest │
+│ PA/1926af05-5...    │  FAIL  │            36.5% │ An x-ray of a body part other than the chest │
+│ PA/129bf9cd-e...    │  FAIL  │            37.4% │ A chest x-ray                                │
+│ PA/33d38772-8...    │  FAIL  │            49.5% │ A chest x-ray                                │
+│ PA/f2f9e044-d...    │  FAIL  │            41.2% │ A chest x-ray                                │
+│ PA/be20aecf-a...    │  FAIL  │            48.3% │ A chest x-ray                                │
+│ PA/26ddf90a-9...    │  FAIL  │            36.7% │ An x-ray of a body part other than the chest │
+│ PA/cb3093f9-c...    │  FAIL  │            47.0% │ A chest x-ray                                │
+│ PA/33b3a765-1...    │  FAIL  │            48.6% │ A chest x-ray                                │
+│ PA/83d86f04-b...    │  FAIL  │            47.6% │ A chest x-ray                                │
+│ PA/00d9b861-1...    │  FAIL  │            32.4% │ An x-ray of a body part other than the chest │
+│ PA/119e55a4-3...    │  FAIL  │            37.8% │ An x-ray of a body part other than the chest │
+│ LAT/a4169dcd-9...   │  FAIL  │            44.9% │ A chest x-ray                                │
+│ LAT/0fe58aee-2...   │  FAIL  │            32.8% │ An x-ray of a body part other than the chest │
+│ LAT/22764d47-c...   │  FAIL  │            38.3% │ An x-ray of a body part other than the chest │
+│ LAT/83500160-f...   │  FAIL  │            40.9% │ An x-ray of a body part other than the chest │
+│ LAT/4e0ace62-b...   │  FAIL  │            34.5% │ An x-ray of a body part other than the chest │
+│ LAT/517a99cf-f...   │  FAIL  │            38.2% │ An x-ray of a body part other than the chest │
+│ LAT/c24909c9-d...   │  FAIL  │            40.2% │ An x-ray of a body part other than the chest │
+│ LAT/148de715-e...   │  FAIL  │            33.3% │ An x-ray of a body part other than the chest │
+│ LAT/deb14478-1...   │  FAIL  │            40.9% │ An x-ray of a body part other than the chest │
+│ LAT/0f027e5b-6...   │  FAIL  │            42.3% │ A chest x-ray                                │
+│ LAT/34dabc01-e...   │  FAIL  │            36.4% │ An x-ray of a body part other than the chest │
+│ LAT/d8d61c4f-a...   │  FAIL  │            34.4% │ An x-ray of a body part other than the chest │
+│ LAT/480b3523-5...   │  FAIL  │            33.5% │ An x-ray of a body part other than the chest │
+│ LAT/e7971d63-4...   │  FAIL  │            44.4% │ A chest x-ray                                │
+│ LAT/e69514be-6...   │  FAIL  │            37.7% │ An x-ray of a body part other than the chest │
+│ LAT/39b1cc7b-d...   │  FAIL  │            42.4% │ A chest x-ray                                │
+│ LAT/b05e9900-e...   │  FAIL  │            42.0% │ A chest x-ray                                │
+│ LAT/0d459d4d-0...   │  FAIL  │            35.6% │ An x-ray of a body part other than the chest │
+│ LAT/e4716923-6...   │  FAIL  │            31.6% │ An x-ray of a body part other than the chest │
+│ LAT/1b684a18-d...   │  FAIL  │            29.7% │ An x-ray of a body part other than the chest │
+│ OTHER/leg.png...    │  PASS  │             9.9% │ An x-ray of a body part other than the chest │
+│ OTHER/pomeranian... │  PASS  │            10.3% │ A digital screenshot or document             │
+│ OTHER/wrist.png...  │  PASS  │            13.5% │ An x-ray of a body part other than the chest │
+│ OTHER/chair.png...  │  PASS  │             7.2% │ A non-medical image                          │
+│ OTHER/spine.png...  │  PASS  │            18.7% │ An x-ray of a body part other than the chest │
+│ OTHER/pelvis.png... │  PASS  │            15.8% │ An x-ray of a body part other than the chest │
+└─────────────────────┴────────┴──────────────────┴──────────────────────────────────────────────┘
+
+Overall Accuracy: 24.2%
+❌ System failed to reject some non-CXR images or rejected valid CXRs.
+(ght-qcxr) michaelevans@Michaels-Mac-mini ght-qcxr % uv run medsiglip/cxr_batch_classifier_0.py
+  File "/Users/michaelevans/CODE/ght-qcxr/medsiglip/cxr_batch_classifier_0.py", line 33
+    "OTHER": "data/other"               # Should match ANY 'OTHER_*'
+           ^
+SyntaxError: invalid syntax
+(ght-qcxr) michaelevans@Michaels-Mac-mini ght-qcxr % uv run medsiglip/cxr_batch_classifier_0.py
+🧪 Zero-Shot Classification: CXR (Views) vs OTHER (mps)
+Loading weights: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 888/888 [00:00<00:00, 4703.11it/s, Materializing param=vision_model.post_layernorm.weight]
+Testing AP... ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 100% 0:02:34
+Testing PA... ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 100% 0:01:42
+Testing LAT... ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 100% 0:01:42
+Testing OTHER... ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 100% 0:00:05
+                  Classification Accuracy                  
+┏━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━━┓
+┃ Source         ┃ Predicted Label ┃ Confidence ┃ Verdict ┃
+┡━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━━━┩
+│ OTHER/screensh │ OTHER_NAT       │      35.4% │  PASS   │
+│ OTHER/leg.png  │ OTHER_MED       │      45.4% │  PASS   │
+│ OTHER/pomerani │ OTHER_NAT       │      47.2% │  PASS   │
+│ OTHER/wrist.pn │ OTHER_MED       │      34.9% │  PASS   │
+│ OTHER/chair.pn │ OTHER_NAT       │      42.5% │  PASS   │
+│ OTHER/spine.pn │ CXR_PA          │      30.0% │  FAIL   │
+│ OTHER/pelvis.p │ OTHER_MED       │      29.7% │  PASS   │
+│ OTHER/white.pn │ OTHER_DIG       │      40.1% │  PASS   │
+└────────────────┴─────────────────┴────────────┴─────────┘
+
+Summary:
+CXR Detection Accuracy:   569/569 (100.0%)
+Rejection (Other) Accuracy: 7/8 (87.5%)
+(ght-qcxr) michaelevans@Michaels-Mac-mini ght-qcxr % uv run medsiglip/cxr_batch_classifier_0.py
+🧪 Zero-Shot Classification: Sigmoid Confidence (mps)
+Loading weights: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 888/888 [00:00<00:00, 4068.09it/s, Materializing param=vision_model.post_layernorm.weight]
+Testing AP... ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 100% 0:00:12
+Testing PA... ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 100% 0:00:11
+Testing LAT... ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 100% 0:00:11
+Testing OTHER... ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 100% 0:00:04
+                Sigmoid Classification Accuracy                 
+┏━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━━┓
+┃ Source              ┃ Predicted Label ┃ Confidence ┃ Verdict ┃
+┡━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━━━┩
+│ AP/d8772981-0...    │ CXR_LAT         │       0.0% │  FAIL   │
+│ AP/be1a10a3-6...    │ CXR_LAT         │       0.0% │  FAIL   │
+│ AP/ca834dd6-7...    │ OTHER_MED       │       0.0% │  FAIL   │
+│ AP/a4110bed-d...    │ CXR_LAT         │       0.0% │  FAIL   │
+│ PA/77a72053-8...    │ CXR_LAT         │       0.0% │  FAIL   │
+│ PA/129bf9cd-e...    │ CXR_LAT         │       0.0% │  FAIL   │
+│ PA/119e55a4-3...    │ CXR_LAT         │       0.0% │  FAIL   │
+│ OTHER/screenshot... │ OTHER_NAT       │       0.0% │  PASS   │
+│ OTHER/leg.png...    │ OTHER_MED       │       0.0% │  PASS   │
+│ OTHER/pomeranian... │ OTHER_DIG       │       0.0% │  PASS   │
+│ OTHER/wrist.png...  │ OTHER_MED       │       0.0% │  PASS   │
+│ OTHER/chair.png...  │ OTHER_NAT       │       0.0% │  PASS   │
+│ OTHER/spine.png...  │ OTHER_MED       │       0.0% │  PASS   │
+│ OTHER/pelvis.png... │ OTHER_MED       │       0.0% │  PASS   │
+│ OTHER/white.png...  │ OTHER_DIG       │       0.0% │  PASS   │
+└─────────────────────┴─────────────────┴────────────┴─────────┘
+
+Overall Accuracy: 61/68 (89.7%)
+(ght-qcxr) michaelevans@Michaels-Mac-mini ght-qcxr % uv run medsiglip/cxr_batch_classifier_0.py
+🧪 Zero-Shot Classification: AutoProcessor (mps)
+Loading weights: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 888/888 [00:00<00:00, 4677.13it/s, Materializing param=vision_model.post_layernorm.weight]
+The image processor of type `SiglipImageProcessor` is now loaded as a fast processor by default, even if the model checkpoint was saved with a slow processor. This is a breaking change and may produce slightly different outputs. To continue using the slow processor, instantiate this class with `use_fast=False`. 
+Testing AP... ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 100% 0:00:12
+Testing PA... ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 100% 0:00:11
+Testing LAT... ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 100% 0:00:11
+Testing OTHER... ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 100% 0:00:04
+                        AutoProcessor Results                         
+┏━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━┳━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━┓
+┃ Source            ┃ Predicted Label ┃ Conf % ┃ Raw Logit ┃ Verdict ┃
+┡━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━╇━━━━━━━━╇━━━━━━━━━━━╇━━━━━━━━━┩
+│ AP/d8772981...    │ CXR_LAT         │   0.0% │     -8.53 │  FAIL   │
+│ AP/be1a10a3...    │ CXR_LAT         │   0.0% │     -8.33 │  FAIL   │
+│ PA/77a72053...    │ CXR_LAT         │   0.0% │     -8.60 │  FAIL   │
+│ PA/e63400c2...    │ CXR_LAT         │   0.0% │     -9.02 │  FAIL   │
+│ PA/129bf9cd...    │ CXR_LAT         │   0.0% │     -8.99 │  FAIL   │
+│ PA/119e55a4...    │ CXR_LAT         │   0.0% │     -8.79 │  FAIL   │
+│ OTHER/screensh... │ OTHER_DIG       │   0.0% │     -9.86 │  PASS   │
+│ OTHER/leg.png...  │ OTHER_MED       │   0.0% │     -9.04 │  PASS   │
+│ OTHER/pomerani... │ OTHER_NAT       │   0.0% │     -9.52 │  PASS   │
+│ OTHER/wrist.pn... │ OTHER_MED       │   0.0% │     -8.60 │  PASS   │
+│ OTHER/chair.pn... │ OTHER_NAT       │   0.0% │     -9.70 │  PASS   │
+│ OTHER/spine.pn... │ OTHER_MED       │   0.0% │     -9.02 │  PASS   │
+│ OTHER/pelvis.p... │ OTHER_MED       │   0.0% │     -8.79 │  PASS   │
+│ OTHER/white.pn... │ OTHER_DIG       │   0.0% │     -9.79 │  PASS   │
+└───────────────────┴─────────────────┴────────┴───────────┴─────────┘
+
+Overall Accuracy: 62/68 (91.2%)
+
+⚠️  WARNING: Logits are extremely low (avg < -5).
+This implies the Text and Images are not matching at all.
+1. Check if the model is truly 'MedSigLIP' or just base 'SigLIP'.
+2. Base SigLIP might require prompts like 'a photo of {label}'.
+(ght-qcxr) michaelevans@Michaels-Mac-mini ght-qcxr % uv run medsiglip/test_normalization.py 
+🔍 Preprocessing Diagnostic (mps)
+Loading weights: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 888/888 [00:00<00:00, 4807.20it/s, Materializing param=vision_model.post_layernorm.weight]
+Testing on: 9c7830c5-8c07ea32-bc1f31b7-fa1dd93f-31486275.png
+                Logit Response by Strategy                
+┏━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━━━━┓
+┃ Strategy        ┃ CXR Logit ┃ Cat Logit ┃ Sigmoid(CXR) ┃
+┡━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━╇━━━━━━━━━━━╇━━━━━━━━━━━━━━┩
+│ siglip_standard │     -9.37 │    -10.59 │         0.0% │
+│ imagenet        │    -11.56 │    -10.48 │         0.0% │
+│ raw             │     -9.53 │    -10.64 │         0.0% │
+└─────────────────┴───────────┴───────────┴──────────────┘
+
+Goal: Find the strategy where 'CXR Logit' is POSITIVE (> 0.0).
+(ght-qcxr) michaelevans@Michaels-Mac-mini ght-qcxr % uv run medsiglip/test_normalization.py
+🔍 Preprocessing Diagnostic (mps)
+Loading weights: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 888/888 [00:00<00:00, 3881.51it/s, Materializing param=vision_model.post_layernorm.weight]
+Testing on: 9c7830c5-8c07ea32-bc1f31b7-fa1dd93f-31486275.png
+                Logit Response by Strategy                
+┏━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━━━━┓
+┃ Strategy        ┃ CXR Logit ┃ Cat Logit ┃ Sigmoid(CXR) ┃
+┡━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━╇━━━━━━━━━━━╇━━━━━━━━━━━━━━┩
+│ siglip_standard │     -9.37 │    -10.59 │         0.0% │
+│ imagenet        │    -11.56 │    -10.48 │         0.0% │
+│ raw             │     -9.53 │    -10.64 │         0.0% │
+└─────────────────┴───────────┴───────────┴──────────────┘
+
+Goal: Find the strategy where 'CXR Logit' is POSITIVE (> 0.0).
+(ght-qcxr) michaelevans@Michaels-Mac-mini ght-qcxr % uv run medsiglip/cxr_batch_classifier_0.py
+🧪 MedSigLIP Batch Test: Fixed Normalization (mps)
+Loading weights: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 888/888 [00:00<00:00, 4765.71it/s, Materializing param=vision_model.post_layernorm.weight]
+The image processor of type `SiglipImageProcessor` is now loaded as a fast processor by default, even if the model checkpoint was saved with a slow processor. This is a breaking change and may produce slightly different outputs. To continue using the slow processor, instantiate this class with `use_fast=False`. 
+✅ Processor successfully patched to Mean/Std [0.5, 0.5, 0.5]
+Scanning AP... ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 100% 0:00:12
+Scanning PA... ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 100% 0:00:12
+Scanning LAT... ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 100% 0:00:12
+Scanning OTHER... ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 100% 0:00:04
+         Corrected AutoProcessor Results         
+┏━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━┳━━━━━━━━┓
+┃ Source         ┃ Prediction  ┃  Conf ┃ Status ┃
+┡━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━╇━━━━━━━╇━━━━━━━━┩
+│ AP/d8772981    │ CXR_LAT     │ 31.6% │  FAIL  │
+│ AP/ed621002    │ CXR_FRONTAL │ 73.0% │  PASS  │
+│ AP/486e0d9c    │ CXR_FRONTAL │ 71.5% │  PASS  │
+│ AP/c9d38f09    │ CXR_FRONTAL │ 70.4% │  PASS  │
+│ AP/036c34ff    │ CXR_FRONTAL │ 68.4% │  PASS  │
+│ PA/77a72053    │ CXR_LAT     │ 32.2% │  FAIL  │
+│ PA/8dbb9065    │ CXR_FRONTAL │ 66.2% │  PASS  │
+│ PA/129bf9cd    │ CXR_LAT     │ 31.4% │  FAIL  │
+│ PA/33d38772    │ CXR_FRONTAL │ 66.7% │  PASS  │
+│ PA/cb3093f9    │ CXR_FRONTAL │ 63.1% │  PASS  │
+│ PA/119e55a4    │ CXR_FRONTAL │ 59.7% │  PASS  │
+│ LAT/4e0ace62   │ CXR_LAT     │ 35.0% │  PASS  │
+│ OTHER/screensh │ OTHER       │ 74.2% │  PASS  │
+│ OTHER/leg.png  │ OTHER       │ 83.7% │  PASS  │
+│ OTHER/pomerani │ OTHER       │ 75.4% │  PASS  │
+│ OTHER/wrist.pn │ OTHER       │ 70.2% │  PASS  │
+│ OTHER/chair.pn │ OTHER       │ 81.8% │  PASS  │
+│ OTHER/spine.pn │ CXR_FRONTAL │ 40.1% │  FAIL  │
+│ OTHER/pelvis.p │ OTHER       │ 59.8% │  PASS  │
+│ OTHER/white.pn │ OTHER       │ 78.8% │  PASS  │
+└────────────────┴─────────────┴───────┴────────┘
+
+Overall Accuracy: 64/68 (94.1%)
+   CXR_FRONTAL: 37/40 (92.5%)
+   CXR_LAT: 20/20 (100.0%)
+   OTHER: 7/8 (87.5%)
+(ght-qcxr) michaelevans@Michaels-Mac-mini ght-qcxr % uv add sklearn joblib
+  × Failed to build `sklearn==0.0.post12`
+  ├─▶ The build backend returned an error
+  ╰─▶ Call to `setuptools.build_meta:__legacy__.build_wheel` failed (exit status: 1)
+
+      [stderr]
+      The 'sklearn' PyPI package is deprecated, use 'scikit-learn'
+      rather than 'sklearn' for pip commands.
+
+      Here is how to fix this error in the main use cases:
+      - use 'pip install scikit-learn' rather than 'pip install sklearn'
+      - replace 'sklearn' by 'scikit-learn' in your pip requirements files
+        (requirements.txt, setup.py, setup.cfg, Pipfile, etc ...)
+      - if the 'sklearn' package is used by one of your dependencies,
+        it would be great if you take some time to track which package uses
+        'sklearn' instead of 'scikit-learn' and report it to their issue tracker
+      - as a last resort, set the environment variable
+        SKLEARN_ALLOW_DEPRECATED_SKLEARN_PACKAGE_INSTALL=True to avoid this error
+
+      More information is available at
+      https://github.com/scikit-learn/sklearn-pypi-package
+
+      hint: This usually indicates a problem with the package or the build environment.
+  help: If you want to add the package regardless of the failed resolution, provide the `--frozen` flag to skip locking and syncing.
+(ght-qcxr) michaelevans@Michaels-Mac-mini ght-qcxr % uv add scikit-learn joblib
+Resolved 66 packages in 1.00s
+Installed 3 packages in 60ms
+ + joblib==1.5.3
+ + scikit-learn==1.8.0
+ + threadpoolctl==3.6.0
+(ght-qcxr) michaelevans@Michaels-Mac-mini ght-qcxr % uv run medsiglip/cxr_batch_classifier_2.py
+🏭 Building Production Classifier (mps)
+Loading MedSigLIP model...
+Loading weights: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 888/888 [00:00<00:00, 3669.80it/s, Materializing param=vision_model.post_layernorm.weight]
+
+1. Extracting Features...
+   Processing AP (249 images)...
+   -> AP ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 100% 0:01:59
+   Processing PA (161 images)...
+   -> PA ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 100% 0:01:19
+   Processing LAT (159 images)...
+   -> LAT ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 100% 0:01:18
+   Processing OTHER (8 images)...
+   -> OTHER ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 100% 0:00:03
+✓ Data Collection Complete. Total Samples: 577
+   Shape: (577, 1152) (Samples, Features)
+
+2. Training Logistic Regression...
+   Training Set: 461 samples
+   Test Set:     116 samples
+
+3. Validation Results
+   Overall Accuracy: 99.14%
+
+Confusion Matrix:
+┏━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━┳━━━━━━━┓
+┃ True \ Pred ┃ CXR_FRONTAL ┃ CXR_LAT ┃ OTHER ┃
+┡━━━━━━━━━━━━━╇━━━━━━━━━━━━━╇━━━━━━━━━╇━━━━━━━┩
+│ CXR_FRONTAL │          81 │       1 │     0 │
+│ CXR_LAT     │           0 │      32 │     0 │
+│ OTHER       │           0 │       0 │     2 │
+└─────────────┴─────────────┴─────────┴───────┘
+
+              precision    recall  f1-score   support
+
+ CXR_FRONTAL       1.00      0.99      0.99        82
+     CXR_LAT       0.97      1.00      0.98        32
+       OTHER       1.00      1.00      1.00         2
+
+    accuracy                           0.99       116
+   macro avg       0.99      1.00      0.99       116
+weighted avg       0.99      0.99      0.99       116
+
+
+4. Saving Model...
+   Saved to: models/cxr_classifier_production.joblib
+   (Size: ~10-50KB)
+(ght-qcxr) michaelevans@Michaels-Mac-mini ght-qcxr % uv add scikit-learn joblib                
+Resolved 66 packages in 9ms
+Audited 51 packages in 12ms
+(ght-qcxr) michaelevans@Michaels-Mac-mini ght-qcxr % uv run medsiglip/cxr_batch_classifier_3.py
+🧪 Production Classifier Test (mps)
+Loading weights: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 888/888 [00:00<00:00, 3913.98it/s, Materializing param=vision_model.post_layernorm.weight]
+✅ Models Loaded Successfully
+Testing PADCHEST_NORMAL (CXR_FRONTAL)... ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 100% 0:28:58
+Testing LATERALS (CXR_LAT)... ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 100% 0:00:03
+                      Production Test Results                       
+┏━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━┳━━━━━━━━┓
+┃ Source          ┃ File            ┃ Prediction  ┃  Conf ┃ Result ┃
+┡━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━╇━━━━━━━╇━━━━━━━━┩
+│ PADCHEST_NORMAL │ Normal-1821.png │ CXR_FRONTAL │ 96.2% │  PASS  │
+│ PADCHEST_NORMAL │ Normal-2496.png │ CXR_FRONTAL │ 97.6% │  PASS  │
+│ PADCHEST_NORMAL │ Normal-788.png  │ CXR_FRONTAL │ 97.7% │  PASS  │
+│ PADCHEST_NORMAL │ Normal-2241.png │ CXR_LAT     │ 65.7% │  FAIL  │
+│ PADCHEST_NORMAL │ Normal-1693.png │ OTHER       │ 52.6% │  FAIL  │
+│ LATERALS        │ lat8.png        │ OTHER       │ 95.2% │  FAIL  │
+│ LATERALS        │ lat6.png        │ OTHER       │ 99.1% │  FAIL  │
+│ LATERALS        │ lat7.png        │ OTHER       │ 99.3% │  FAIL  │
+│ LATERALS        │ lat5.png        │ OTHER       │ 92.8% │  FAIL  │
+│ LATERALS        │ lat4.png        │ OTHER       │ 98.2% │  FAIL  │
+│ LATERALS        │ lat3.png        │ OTHER       │ 97.4% │  FAIL  │
+│ LATERALS        │ lat2.png        │ OTHER       │ 98.8% │  FAIL  │
+└─────────────────┴─────────────────┴─────────────┴───────┴────────┘
+
+Summary per Dataset:
+   PADCHEST_NORMAL: 3498/3500 (99.9%)
+   LATERALS: 0/7 (0.0%)
+
+Overall Accuracy: 3498/3507 (99.7%)
+(ght-qcxr) michaelevans@Michaels-Mac-mini ght-qcxr % uv run medsiglip/cxr_batch_classifier_3.py
+🧪 Production Classifier Test v2 (Letterbox) (mps)
+Loading weights: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 888/888 [00:00<00:00, 4002.06it/s, Materializing param=vision_model.post_layernorm.weight]
+✅ Models Loaded Successfully
+Testing PADCHEST_NORMAL (CXR_FRONTAL)... ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 100% 0:00:24
+Testing LATERALS (CXR_LAT)... ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 100% 0:00:03
+                Production Test Results (Letterbox)                 
+┏━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━┳━━━━━━━━┓
+┃ Source          ┃ File            ┃ Prediction  ┃  Conf ┃ Result ┃
+┡━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━╇━━━━━━━╇━━━━━━━━┩
+│ PADCHEST_NORMAL │ Normal-1821.png │ CXR_FRONTAL │ 96.0% │  PASS  │
+│ PADCHEST_NORMAL │ Normal-2496.png │ CXR_FRONTAL │ 97.6% │  PASS  │
+│ PADCHEST_NORMAL │ Normal-788.png  │ CXR_FRONTAL │ 97.9% │  PASS  │
+│ LATERALS        │ lat8.png        │ CXR_LAT     │ 98.3% │  PASS  │
+│ LATERALS        │ lat6.png        │ CXR_LAT     │ 98.2% │  PASS  │
+│ LATERALS        │ lat7.png        │ CXR_LAT     │ 98.4% │  PASS  │
+└─────────────────┴─────────────────┴─────────────┴───────┴────────┘
+
+Summary per Dataset:
+   PADCHEST_NORMAL: 50/50 (100.0%)
+   LATERALS: 7/7 (100.0%)
+
+Overall Accuracy: 57/57 (100.0%)
+(ght-qcxr) michaelevans@Michaels-Mac-mini ght-qcxr % uv run medsiglip/cxr_batch_classifier_fast_4.py
+🚀 High-Throughput Batch Classifier (mps)
+Loading weights: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 888/888 [00:00<00:00, 3540.27it/s, Materializing param=vision_model.post_layernorm.weight]
+Processing 500 images with 4 CPU workers...
+Inferencing... ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 100% 0:04:19
+
+Done! Processed 500 images.
+Frontal CXRs found: 500
+(ght-qcxr) michaelevans@Michaels-Mac-mini ght-qcxr % uv run medsiglip/cxr_batch_classifier_fast_4.py
+🚀 Turbo Batch Classifier (mps)
+Loading weights: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 888/888 [00:00<00:00, 3653.98it/s, Materializing param=vision_model.post_layernorm.weight]
+Processing 500 images...
+Inferencing... ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━   0% -:--:--
+Traceback (most recent call last):
+  File "/Users/michaelevans/CODE/ght-qcxr/medsiglip/cxr_batch_classifier_fast_4.py", line 158, in <module>
+    main()
+  File "/Users/michaelevans/CODE/ght-qcxr/medsiglip/cxr_batch_classifier_fast_4.py", line 129, in main
+    outputs = model.vision_model(pixel_values=batch_imgs)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/michaelevans/CODE/ght-qcxr/.venv/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1553, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/michaelevans/CODE/ght-qcxr/.venv/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1562, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/michaelevans/CODE/ght-qcxr/.venv/lib/python3.12/site-packages/transformers/models/siglip/modeling_siglip.py", line 647, in forward
+    encoder_outputs: BaseModelOutput = self.encoder(
+                                       ^^^^^^^^^^^^^
+  File "/Users/michaelevans/CODE/ght-qcxr/.venv/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1553, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/michaelevans/CODE/ght-qcxr/.venv/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1562, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/michaelevans/CODE/ght-qcxr/.venv/lib/python3.12/site-packages/transformers/models/siglip/modeling_siglip.py", line 498, in forward
+    hidden_states = encoder_layer(
+                    ^^^^^^^^^^^^^^
+  File "/Users/michaelevans/CODE/ght-qcxr/.venv/lib/python3.12/site-packages/transformers/modeling_layers.py", line 93, in __call__
+    return super().__call__(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/michaelevans/CODE/ght-qcxr/.venv/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1553, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/michaelevans/CODE/ght-qcxr/.venv/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1562, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/michaelevans/CODE/ght-qcxr/.venv/lib/python3.12/site-packages/transformers/models/siglip/modeling_siglip.py", line 392, in forward
+    hidden_states = self.mlp(hidden_states)
+                    ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/michaelevans/CODE/ght-qcxr/.venv/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1553, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/michaelevans/CODE/ght-qcxr/.venv/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1562, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/michaelevans/CODE/ght-qcxr/.venv/lib/python3.12/site-packages/transformers/models/siglip/modeling_siglip.py", line 359, in forward
+    hidden_states = self.activation_fn(hidden_states)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/michaelevans/CODE/ght-qcxr/.venv/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1553, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/michaelevans/CODE/ght-qcxr/.venv/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1562, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/michaelevans/CODE/ght-qcxr/.venv/lib/python3.12/site-packages/transformers/activations.py", line 51, in forward
+    return self.act(input)
+           ^^^^^^^^^^^^^^^
+KeyboardInterrupt
+(ght-qcxr) michaelevans@Michaels-Mac-mini ght-qcxr % uv run medsiglip/cxr_batch_classifier_fast_4.py
+🚀 Stable Batch Classifier (mps)
+Loading weights: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 888/888 [00:00<00:00, 4477.84it/s, Materializing param=vision_model.post_layernorm.weight]
+Processing 3500 images...
+Inferencing... ━╺━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━   3% 0:27:24
+Traceback (most recent call last):
+  File "/Users/michaelevans/CODE/ght-qcxr/medsiglip/cxr_batch_classifier_fast_4.py", line 141, in <module>
+    main()
+  File "/Users/michaelevans/CODE/ght-qcxr/medsiglip/cxr_batch_classifier_fast_4.py", line 115, in main
+    outputs = model.vision_model(pixel_values=batch_imgs)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/michaelevans/CODE/ght-qcxr/.venv/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1553, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/michaelevans/CODE/ght-qcxr/.venv/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1562, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/michaelevans/CODE/ght-qcxr/.venv/lib/python3.12/site-packages/transformers/models/siglip/modeling_siglip.py", line 647, in forward
+    encoder_outputs: BaseModelOutput = self.encoder(
+                                       ^^^^^^^^^^^^^
+  File "/Users/michaelevans/CODE/ght-qcxr/.venv/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1553, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/michaelevans/CODE/ght-qcxr/.venv/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1562, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/michaelevans/CODE/ght-qcxr/.venv/lib/python3.12/site-packages/transformers/models/siglip/modeling_siglip.py", line 498, in forward
+    hidden_states = encoder_layer(
+                    ^^^^^^^^^^^^^^
+  File "/Users/michaelevans/CODE/ght-qcxr/.venv/lib/python3.12/site-packages/transformers/modeling_layers.py", line 93, in __call__
+    return super().__call__(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/michaelevans/CODE/ght-qcxr/.venv/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1553, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/michaelevans/CODE/ght-qcxr/.venv/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1562, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/michaelevans/CODE/ght-qcxr/.venv/lib/python3.12/site-packages/transformers/models/siglip/modeling_siglip.py", line 391, in forward
+    hidden_states = self.layer_norm2(hidden_states)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/michaelevans/CODE/ght-qcxr/.venv/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1553, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/michaelevans/CODE/ght-qcxr/.venv/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1562, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/michaelevans/CODE/ght-qcxr/.venv/lib/python3.12/site-packages/torch/nn/modules/normalization.py", line 202, in forward
+    return F.layer_norm(
+           ^^^^^^^^^^^^^
+  File "/Users/michaelevans/CODE/ght-qcxr/.venv/lib/python3.12/site-packages/torch/nn/functional.py", line 2576, in layer_norm
+    return torch.layer_norm(input, normalized_shape, weight, bias, eps, torch.backends.cudnn.enabled)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+KeyboardInterrupt
+(ght-qcxr) michaelevans@Michaels-Mac-mini ght-qcxr % uv run medsiglip/cxr_batch_classifier_fast_4.py
+🚀 Stable Batch Classifier (mps)
+Loading weights: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 888/888 [00:00<00:00, 4186.72it/s, Materializing param=vision_model.post_layernorm.weight]
+Processing 100 images...
+Inferencing... ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 100% 0:00:00
+
+Finished!
+Time: 48.88s
+Speed: 2.05 images/sec
+(ght-qcxr) michaelevans@Michaels-Mac-mini ght-qcxr % uv run medsiglip/cxr_batch_classifier_fast_4.py
+🚀 Turbo Square Classifier (mps)
+Loading weights: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 888/888 [00:00<00:00, 4130.93it/s, Materializing param=vision_model.post_layernorm.weight]
+Processing 1000 images...
+Inferencing... ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 100% 0:00:00
+
+Finished!
+Time: 386.13s
+Speed: 2.59 images/sec
+(ght-qcxr) michaelevans@Michaels-Mac-mini ght-qcxr % uv run medsiglip/cxr_frontal_classifier_train.py 
+🎯 Training AP vs PA Specialist (mps)
+Loading weights: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 888/888 [00:00<00:00, 4258.27it/s, Materializing param=vision_model.post_layernorm.weight]
+
+1. Extracting Features (1152 dims)...
+   Processing AP ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 100% 0:02:00
+   Processing PA ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 100% 0:01:19
+✓ Data Collected. Shape: (410, 1152)
+
+2. Training Logistic Regression...
+
+Test Accuracy: 90.24%
+    Confusion Matrix     
+┏━━━━━━━━━━━━━┳━━━━┳━━━━┓
+┃ True \ Pred ┃ AP ┃ PA ┃
+┡━━━━━━━━━━━━━╇━━━━╇━━━━┩
+│ AP          │ 44 │ 6  │
+│ PA          │ 2  │ 30 │
+└─────────────┴────┴────┘
+
+Saved to models/cxr_projection_classifier.joblib
+(ght-qcxr) michaelevans@Michaels-Mac-mini ght-qcxr % 
