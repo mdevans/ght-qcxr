@@ -19,6 +19,9 @@ KEY_CXAS_TENSOR = "cxas_Tensor"
 KEY_METADATA = "metadata"
 KEY_ORIGINAL_SHAPE = "original_shape"
 
+IMAGENET_MEAN = torch.tensor([0.485, 0.456, 0.406]).view(3, 1, 1)
+IMAGENET_STD = torch.tensor([0.229, 0.224, 0.225]).view(3, 1, 1)
+
 # --- DICOM Metadata Extraction ---
 EXTRACTED_DICOM_TAGS = [
     "PatientID",
@@ -70,6 +73,10 @@ def _load_dicom_image(path: Path) -> tuple[np.ndarray, dict[str, str]]:
         else:
             metadata[keyword] = "Not Found"
 
+    # Explicitly clear the heavy pixel data from memory
+    del ds.PixelData
+    del ds
+
     return pixels, metadata
 
 def _load_pil_image(path: Path) -> tuple[np.ndarray, dict]:
@@ -113,8 +120,7 @@ def _create_xrv_tensor(image: np.ndarray) -> torch.Tensor:
     NOTE: This pipeline is specific to XRV models. It requires a single-channel
     image normalized to the range [-1024, 1024].
     """
-    padded_image = _resize_with_padding(image, target_size=TARGET_SIZE)
-    normalized = xrv.datasets.normalize(padded_image, 255)
+    normalized = xrv.datasets.normalize(image, 255)
     
     tensor = torch.from_numpy(normalized).unsqueeze(0)
     return tensor.unsqueeze(0) # Add batch dimension
@@ -127,18 +133,14 @@ def _create_cxas_tensor(image: np.ndarray) -> torch.Tensor:
     NOTE: This pipeline is specific to models with an ImageNet-trained backbone (like ResNet).
     It requires a 3-channel image and normalization with ImageNet's mean and std.
     """
-    padded_image = _resize_with_padding(image, target_size=TARGET_SIZE)
-    
     # Create a 3-channel image by stacking the grayscale channel, without losing float precision
-    rgb_image = cv2.cvtColor(padded_image, cv2.COLOR_GRAY2RGB)
+    rgb_image = cv2.cvtColor(image, cv2.COLOR_GRAY2RGB)
     
     # Transpose from (H, W, C) to (C, H, W) and convert to tensor
     tensor = torch.from_numpy(rgb_image.transpose(2, 0, 1)).float() / 255.0
     
     # ImageNet normalization
-    mean = torch.tensor([0.485, 0.456, 0.406]).view(3, 1, 1)
-    std = torch.tensor([0.229, 0.224, 0.225]).view(3, 1, 1)
-    normalized_tensor = (tensor - mean) / std
+    normalized_tensor = (tensor - IMAGENET_MEAN) / IMAGENET_STD
     
     return normalized_tensor.unsqueeze(0) # Add batch dimension
 
@@ -154,12 +156,17 @@ def preprocess_image(image_path: Path) -> dict:
     Returns:
         A dictionary containing the preprocessed tensors for each segmentation model and metadata.
     """
+    if not image_path.is_file():
+        raise ValueError(f"Failed to load image at {image_path}")
+    
     # Load the image:
     pixels, metadata = _load_dicom_image(image_path) if is_dicom(image_path) else _load_pil_image(image_path)
 
+    padded_image = _resize_with_padding(pixels, target_size=TARGET_SIZE)
+
     return {
-        KEY_XRV_TENSOR: _create_xrv_tensor(pixels),
-        KEY_CXAS_TENSOR: _create_cxas_tensor(pixels),
+        KEY_XRV_TENSOR: _create_xrv_tensor(padded_image),
+        KEY_CXAS_TENSOR: _create_cxas_tensor(padded_image),
         KEY_METADATA: metadata,
         KEY_ORIGINAL_SHAPE: pixels.shape
     }
