@@ -17,6 +17,7 @@ dependencies = [
     "pyjpegls>=1.5.1",
     "pylibjpeg[all]>=2.1.0",
     "pyorthanc>=1.22.1",
+    "pytest>=9.0.2",
     "rich>=14.3.2",
     "scikit-learn>=1.8.0",
     "scipy>=1.17.0",
