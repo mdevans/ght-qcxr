@@ -1,140 +1,191 @@
 import torch
-import numpy as np
 import cv2
-import re
-import shutil
+import numpy as np
+import json
 from pathlib import Path
-import torch.nn.functional as F
-from PIL import Image
 import torchxrayvision as xrv
 
+# Import your CXAS architecture (Adjust import path if your project structure differs)
 from cxas.models.UNet.backbone_unet import BackboneUNet
 
+# Import your bulletproof preprocessing module
+from preprocessing import (
+    KEY_BASE_IMAGE,
+    KEY_CXAS_TENSOR,
+    KEY_XRV_TENSOR,
+    preprocess_image,
+)
+
 # --- CONFIGURATION ---
+INPUT_DIR = Path("data/input_images")
+OUTPUT_DIR = Path("data/output_masks")
+DEVICE = "cuda" if torch.cuda.is_available() else "mps" if torch.backends.mps.is_available() else "cpu"
 CXAS_WEIGHTS_PATH = Path.home() / ".cxas" / "weights" / "UNet_ResNet50_default.pth"
-IMAGE_DIR = Path("data/TB_Chest_Radiography_Database/Normal")
-OUTPUT_DIR = Path("segment/segmentation_output") # Main output directory
-SAVE_VISUAL_MASKS = True # Parameter to turn on/off visual mask saving
 
-DEVICE = "mps" if torch.backends.mps.is_available() else "cpu"
+# ==========================================
+# 1. SPECIFIC MODEL LOGIC
+# ==========================================
 
-# --- LABEL DICTIONARIES FOR VISUALIZATION ---
-CXAS_LABEL_DICT = {
-    2: "spine", 29: "sternum", 31: "clavicle_left", 32: "clavicle_right",
-    105: "diaphragm", 135: "lung_right", 136: "lung_left"
-}
-XRV_LABEL_DICT = {
-    0: "clavicle_left", 1: "clavicle_right", 13: "spine"
-}
-
-# --- HELPER & PREPROCESSING FUNCTIONS ---
-
-def normalize_cxas(array: torch.Tensor) -> torch.Tensor:
-    return (array - torch.tensor([0.485, 0.456, 0.406]).view(-1, 1, 1)) / (
-           torch.tensor([0.229, 0.224, 0.225]).view(-1, 1, 1))
-
-def normalize_xrv(img_array):
-    return xrv.datasets.normalize(img_array, 255)
-
-def load_cxas_model():
-    print("  -> Loading CXAS model...")
+def load_cxas_model(device):
+    print(f"🚀 Loading CXAS UNet on {device}...")
     model = BackboneUNet(model_name="UNet_ResNet50_default", classes=159)
-    checkpoint = torch.load(CXAS_WEIGHTS_PATH, map_location=DEVICE, weights_only=False)
-    state_dict = checkpoint["model"]
-    if list(state_dict.keys())[0].startswith("module."):
-        state_dict = {k[len("module."):]: v for k, v in state_dict.items()}
-    model.load_state_dict(state_dict, strict=False)
-    model.to(DEVICE).eval()
-    return model
-
-def load_xrv_model():
-    print("  -> Loading TorchXRayVision model...")
-    model = xrv.baseline_models.chestx_det.PSPNet().to(DEVICE).eval()
-    return model
-
-# --- BATCH PROCESSOR ---
-
-def process_batch():
-    print("--- Segmentation Generation Module ---")
+    try:
+        checkpoint = torch.load(CXAS_WEIGHTS_PATH, map_location=device, weights_only=False)
+        state_dict = checkpoint.get("model", checkpoint)
+        if list(state_dict.keys())[0].startswith("module."):
+            state_dict = {k[len("module."):]: v for k, v in state_dict.items()}
+        model.load_state_dict(state_dict, strict=False)
+    except FileNotFoundError:
+        print(f"⚠️ CXAS weights not found at {CXAS_WEIGHTS_PATH}. Ensure they are downloaded before inference.")
     
-    print(f"🧹 Clearing and creating output directory: {OUTPUT_DIR}")
-    if OUTPUT_DIR.exists():
-        shutil.rmtree(OUTPUT_DIR)
-    OUTPUT_DIR.mkdir(parents=True)
+    model.to(device).eval()
+    return model
 
-    print("🧠 Loading segmentation models...")
-    cxas_model = load_cxas_model()
-    xrv_model = load_xrv_model()
+def predict_cxas(model, tensor: torch.Tensor) -> dict[str, np.ndarray]:
+    extracted_masks = {}
+    with torch.no_grad():
+        output_dict = model({"data": tensor})
+        # pred shape is (159, 512, 512)
+        pred = output_dict["segmentation_preds"][0] 
+        
+        # CXAS natively outputs pre-thresholded booleans/logits in this tensor
+        masks = pred.bool().cpu().numpy()
+        
+        for class_idx in range(masks.shape[0]):
+            if class_idx == 0: 
+                continue # Skip background
+                
+            binary_mask = masks[class_idx].astype(np.uint8)
+            
+            # Only save if this anatomy actually exists in the image
+            if binary_mask.max() > 0:
+                extracted_masks[f"class_{class_idx:03d}"] = binary_mask
 
-    valid_extensions = {'.png', '.jpg', '.jpeg'}
-    def natural_sort_key(path_obj):
-        return [int(text) if text.isdigit() else text.lower() for text in re.split(r'(\d+)', path_obj.name)]
+    return extracted_masks
 
-    all_files = sorted([p for p in IMAGE_DIR.iterdir() if p.is_file() and p.suffix.lower() in valid_extensions], key=natural_sort_key)
-    if not all_files:
-        print(f"❌ No images found in {IMAGE_DIR}")
-        return
+def load_xrv_model(device):
+    print(f"🚀 Loading XRV PSPNet on {device}...")
+    model = xrv.baseline_models.chestx_det.PSPNet()
+    model.to(device).eval()
+    return model
 
-    test_files = all_files[:100]
+def predict_xrv(model, tensor: torch.Tensor) -> dict[str, np.ndarray]:
+    extracted_masks = {}
+    with torch.no_grad():
+        output = model(tensor).squeeze(0) # Shape: (14, 512, 512)
+        
+        for i, target_name in enumerate(model.targets):
+            binary_mask = (output[i] > 0.5).cpu().numpy().astype(np.uint8)
+            if binary_mask.max() > 0:
+                safe_name = target_name.replace(" ", "_")
+                extracted_masks[safe_name] = binary_mask
 
-    print(f"\n🧪 Starting segmentation on {len(test_files)} images...")
-    print(f"{'FILENAME':<30} | {'STATUS'}")
-    print("-" * 80)
+    return extracted_masks
 
-    for image_path in test_files:
-        filename = image_path.name
+
+# ==========================================
+# 2. CORE GEOMETRY & POST-PROCESSING
+# ==========================================
+
+def resize_mask_back_to_orig(mask_512: np.ndarray, original_shape: tuple) -> np.ndarray:
+    """Stretches the 512x512 mask directly back to the original image dimensions."""
+    orig_h, orig_w = original_shape[:2]
+    # Simple direct resize reverses the geometric squash applied in preprocessing
+    return cv2.resize(mask_512, (orig_w, orig_h), interpolation=cv2.INTER_NEAREST)
+
+def extract_polygons_from_mask(binary_mask: np.ndarray, min_area: float = 50.0) -> list:
+    """Extracts boundaries as a list of polygons (each polygon is a list of [x, y] coordinates)."""
+    mask_8u = (binary_mask > 0).astype(np.uint8) * 255
+    contours, _ = cv2.findContours(mask_8u, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+    
+    polygons = []
+    for contour in contours:
+        if cv2.contourArea(contour) > min_area:
+            # Safely unpack the OpenCV (N, 1, 2) shape into a standard Python list of [x, y]
+            poly = [pt[0].tolist() for pt in contour]
+            polygons.append(poly)
+            
+    return polygons
+
+
+# ==========================================
+# 3. BATCH ORCHESTRATOR
+# ==========================================
+
+def process_directory(input_dir: Path, output_dir: Path, model_configs: list[dict]):
+    input_dir = Path(input_dir)
+    output_dir = Path(output_dir)
+
+    valid_extensions = {".png", ".jpg", ".jpeg", ".dcm"}
+    image_files = [p for p in input_dir.iterdir() if p.suffix.lower() in valid_extensions]
+
+    print(f"\n🎯 Starting pipeline on {len(image_files)} images...")
+
+    for img_path in image_files:
+        print(f"  Processing: {img_path.name}")
+        
         try:
-            # Create the specific output directory for this image
-            image_output_dir = OUTPUT_DIR / image_path.stem
-            image_output_dir.mkdir(parents=True, exist_ok=True)
+            # 1. Preprocess
+            preprocessed_data = preprocess_image(img_path)
+            orig_shape = preprocessed_data[KEY_BASE_IMAGE].shape
 
-            pil_img = Image.open(image_path).convert("RGB")
-            orig_h, orig_w = pil_img.height, pil_img.width
-            cv_img_raw = cv2.imread(str(image_path), cv2.IMREAD_GRAYSCALE)
+            img_out_dir = output_dir / img_path.stem
+            img_out_dir.mkdir(parents=True, exist_ok=True)
 
-            with torch.no_grad():
-                # CXAS Inference
-                cxas_array = np.transpose(np.array(pil_img), [2, 0, 1])
-                cxas_tensor = normalize_cxas(torch.tensor(cxas_array).float() / 255.0).unsqueeze(0).to(DEVICE)
-                cxas_tensor_interp = F.interpolate(cxas_tensor, size=(512, 512))
-                cxas_pred = cxas_model({"data": cxas_tensor_interp})["segmentation_preds"][0]
-                cxas_masks = F.interpolate(cxas_pred.unsqueeze(0), size=(orig_h, orig_w), mode="nearest")[0].bool().cpu().numpy()
+            # 2. Execute Models
+            for config in model_configs:
+                input_tensor = preprocessed_data[config["tensor_key"]].to(DEVICE)
+                mask_dict_512 = config["predict_fn"](config["model"], input_tensor)
+                
+                model_out_dir = img_out_dir / config["name"]
+                model_out_dir.mkdir(exist_ok=True)
+                
+                numeric_masks_to_save = {}
+                json_polygons_to_save = {}
+                
+                # 3. Format and Extract Features
+                for anatomy_name, raw_mask_512 in mask_dict_512.items():
+                    final_mask = resize_mask_back_to_orig(raw_mask_512, orig_shape)
+                    
+                    numeric_masks_to_save[anatomy_name] = final_mask
+                    json_polygons_to_save[anatomy_name] = extract_polygons_from_mask(final_mask)
+                    
+                    # (Optional) Save PNG for quick visual inspection
+                    cv2.imwrite(str(model_out_dir / f"{anatomy_name}.png"), final_mask * 255)
 
-                # XRV Inference
-                xrv_img_resized = cv2.resize(cv_img_raw, (512, 512))
-                xrv_tensor = torch.from_numpy(normalize_xrv(xrv_img_resized)).unsqueeze(0).unsqueeze(0).to(DEVICE)
-                xrv_output = xrv_model(xrv_tensor)
-                xrv_masks_raw = torch.sigmoid(xrv_output[0]).cpu().numpy()
-                xrv_masks_resized = np.array([cv2.resize(m, (orig_w, orig_h), interpolation=cv2.INTER_NEAREST) for m in xrv_masks_raw])
-                xrv_masks = (xrv_masks_resized > 0.5)
-
-            # --- Save Combined Masks to a Single .npz File (for fast loading) ---
-            npz_save_path = image_output_dir / "masks.npz"
-            np.savez_compressed(npz_save_path, cxas_masks=cxas_masks, xrv_masks=xrv_masks)
-            
-            # --- Save Visual Masks (optional, for debugging) ---
-            if SAVE_VISUAL_MASKS:
-                cxas_visual_dir = image_output_dir / "cxas"
-                cxas_visual_dir.mkdir(exist_ok=True)
-                for idx, label in CXAS_LABEL_DICT.items():
-                    if idx < len(cxas_masks) and np.sum(cxas_masks[idx]) > 0:
-                        cv2.imwrite(str(cxas_visual_dir / f"{idx:03d}_{label}.png"), cxas_masks[idx].astype(np.uint8) * 255)
-
-                xrv_visual_dir = image_output_dir / "xrv"
-                xrv_visual_dir.mkdir(exist_ok=True)
-                for idx, label in XRV_LABEL_DICT.items():
-                    if idx < len(xrv_masks) and np.sum(xrv_masks[idx]) > 0:
-                        cv2.imwrite(str(xrv_visual_dir / f"{idx:03d}_{label}.png"), xrv_masks[idx].astype(np.uint8) * 255)
-            
-            print(f"{filename:<30} | ✅ Segmented and Saved to {image_output_dir.relative_to(Path.cwd())}")
+                # 4. Save Aggregated Output Files
+                if numeric_masks_to_save:
+                    archive_path = model_out_dir / f"{config['name']}_masks.npz"
+                    np.savez_compressed(archive_path, **numeric_masks_to_save)
+                    
+                if json_polygons_to_save:
+                    json_path = model_out_dir / f"{config['name']}_polygons.json"
+                    with open(json_path, "w") as f:
+                        json.dump(json_polygons_to_save, f, indent=2)
 
         except Exception as e:
-            print(f"{filename:<30} | 🚨 ERROR: {e}")
+            print(f"🚨 Error processing {img_path.name}: {e}")
 
-    print("\n" + "="*40)
-    print(f"🎯 COMPLETE | Masks saved to subdirectories in: {OUTPUT_DIR}")
-    print("="*40)
+    print("✅ Batch processing complete.")
+
+# ==========================================
+# 4. ENTRY POINT
+# ==========================================
 
 if __name__ == "__main__":
-    process_batch()
-
+    active_models = [
+        {
+            "name": "cxas",
+            "tensor_key": KEY_CXAS_TENSOR,
+            "model": load_cxas_model(DEVICE),
+            "predict_fn": predict_cxas
+        },
+        {
+            "name": "xrv",
+            "tensor_key": KEY_XRV_TENSOR,
+            "model": load_xrv_model(DEVICE),
+            "predict_fn": predict_xrv
+        }
+    ]
+    
+    process_directory(INPUT_DIR, OUTPUT_DIR, active_models)

@@ -5,6 +5,8 @@ import torch.nn.functional as F
 from PIL import Image
 from cxas.models.UNet.backbone_unet import BackboneUNet
 
+from preprocessing import KEY_BASE_IMAGE, preprocess_image, KEY_CXAS_TENSOR
+
 # --- CONFIG ---
 WEIGHTS_PATH = Path.home() / ".cxas" / "weights" / "UNet_ResNet50_default.pth"
 # TEST_IMAGE = "data/cxr/cxr_normal_0.jpg"
@@ -38,23 +40,28 @@ def run_standalone_sanity_check():
     model.to(DEVICE)
     model.eval()
 
-    print("3. Preprocessing Image (Exact cxas FileLoader Clone)...")
-    try:
-        # 1. Load using PIL
-        pil_img = Image.open(TEST_IMAGE).convert(mode="RGB")
-        orig_file_size = (pil_img.size[1], pil_img.size[0]) # (H, W)
-    except Exception as e:
-        print(f"❌ Error loading image: {e}")
-        return
+    # print("3. Preprocessing Image (Exact cxas FileLoader Clone)...")
+    # try:
+    #     # 1. Load using PIL
+    #     pil_img = Image.open(TEST_IMAGE).convert(mode="RGB")
+    #     orig_file_size = (pil_img.size[1], pil_img.size[0]) # (H, W)
+    # except Exception as e:
+    #     print(f"❌ Error loading image: {e}")
+    #     return
         
-    array = np.array(pil_img)
-    array = np.transpose(array, [2, 0, 1])
-    array = torch.tensor(array).float() / 255.0
-    array = normalize(array).to(DEVICE)
+    # array = np.array(pil_img)
+    # array = np.transpose(array, [2, 0, 1])
+    # array = torch.tensor(array).float() / 255.0
+    # array = normalize(array).to(DEVICE)
     
-    # cxas defaults base_size to 512! We missed this in the previous code.
-    # We were forcing it to 1024, but their code says: self.base_size = 512
-    img_tensor = F.interpolate(array.unsqueeze(0), size=(512, 512))
+    # # cxas defaults base_size to 512! We missed this in the previous code.
+    # # We were forcing it to 1024, but their code says: self.base_size = 512
+    # img_tensor = F.interpolate(array.unsqueeze(0), size=(512, 512))
+    
+    pp_result = preprocess_image(Path(TEST_IMAGE))
+    img_tensor = pp_result[KEY_CXAS_TENSOR].to(DEVICE)
+    orig_file_size = pp_result[KEY_BASE_IMAGE].shape[:2] # (H, W)
+    
     input_dict = {"data": img_tensor}
 
     print("4. Running Inference...")
@@ -70,7 +77,7 @@ def run_standalone_sanity_check():
     masks = pred[0].bool().cpu().numpy()
 
     print("6. Saving Masks (Exact cxas FileSaver Clone)...")
-    out_dir = Path("cxas_test_output_2")
+    out_dir = Path("cxas_test_output_3")
     out_dir.mkdir(exist_ok=True)
     
     for idx, label in LABEL_DICT.items():

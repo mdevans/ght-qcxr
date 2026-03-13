@@ -1,5 +1,6 @@
 import torch
 import numpy as np
+from numpy.typing import NDArray
 import cv2
 import pydicom
 from pydicom.misc import is_dicom
@@ -7,6 +8,14 @@ from pydicom.pixels.processing import apply_voi_lut, apply_modality_lut
 from pydicom.multival import MultiValue
 from pathlib import Path
 import torchxrayvision as xrv
+from typing import Annotated
+
+# --- Custom Types for IDE Readability ---
+XRVTensor = Annotated[torch.Tensor, "shape: (1, 1, 512, 512)", "range: [-1024.0, 1024.0]"]
+CXASTensor = Annotated[torch.Tensor, "shape: (1, 3, 512, 512)", "range: ImageNet Normalized"]
+
+# Strict NumPy typing for the raw image loaders
+GrayscaleImage = Annotated[NDArray[np.uint8], "shape: (H, W)", "channel: single"]
 
 # --- Preprocessing Constants ---
 TARGET_SIZE = 512
@@ -14,10 +23,10 @@ CLAHE_CLIP_LIMIT = 2.0
 CLAHE_TILE_GRID_SIZE = (8, 8)
 
 # --- Output Dictionary Keys ---
+KEY_BASE_IMAGE = "base_image"
 KEY_XRV_TENSOR = "xrv_Tensor"
 KEY_CXAS_TENSOR = "cxas_Tensor"
 KEY_METADATA = "metadata"
-KEY_ORIGINAL_SHAPE = "original_shape"
 
 IMAGENET_MEAN = torch.tensor([0.485, 0.456, 0.406]).view(3, 1, 1)
 IMAGENET_STD = torch.tensor([0.229, 0.224, 0.225]).view(3, 1, 1)
@@ -42,7 +51,7 @@ EXTRACTED_DICOM_TAGS = [
     "RescaleSlope",
 ]
 
-def _load_dicom_image(path: Path) -> tuple[np.ndarray, dict[str, str]]:
+def _load_dicom_image(path: Path) -> tuple[GrayscaleImage, dict[str, str]]:
     """Loads a DICOM file, applies LUTs, and returns an 8-bit, Single Channel NumPy array and metadata."""
     ds = pydicom.dcmread(path)
     
@@ -56,10 +65,11 @@ def _load_dicom_image(path: Path) -> tuple[np.ndarray, dict[str, str]]:
 
     # Handle MONOCHROME1 (inverted) images
     if ds.PhotometricInterpretation == "MONOCHROME1":
-        pixels = cv2.bitwise_not(pixels)
+        cv2.bitwise_not(pixels, dst=pixels)
 
     # Extract only the DICOM fields essential for QA processing into a flat dictionary.
-    metadata = {}
+    metadata: dict[str, str] = {}
+    
     for keyword in EXTRACTED_DICOM_TAGS:
         # getattr fetches the underlying value directly (string, int, float, or MultiValue)
         val = getattr(ds, keyword, None)
@@ -79,7 +89,7 @@ def _load_dicom_image(path: Path) -> tuple[np.ndarray, dict[str, str]]:
 
     return pixels, metadata
 
-def _load_pil_image(path: Path) -> tuple[np.ndarray, dict]:
+def _load_pil_image(path: Path) -> tuple[GrayscaleImage, dict]:
     """Loads a standard image file (PNG/JPG), applies CLAHE and returns an 8-bit, Single Channel NumPy array."""
     # 1. Load natively (Preserves 16-bit as uint16, forces single channel)
     pixels = cv2.imread(str(path), cv2.IMREAD_ANYDEPTH | cv2.IMREAD_GRAYSCALE)
@@ -88,8 +98,9 @@ def _load_pil_image(path: Path) -> tuple[np.ndarray, dict]:
         raise ValueError(f"Failed to load image at {path}")
     
     # 2. Apply CLAHE on the HIGH BIT-DEPTH data first
-    clahe = cv2.createCLAHE(clipLimit=CLAHE_CLIP_LIMIT, tileGridSize=CLAHE_TILE_GRID_SIZE)
-    pixel_array = clahe.apply(pixels)
+    # clahe = cv2.createCLAHE(clipLimit=CLAHE_CLIP_LIMIT, tileGridSize=CLAHE_TILE_GRID_SIZE)
+    # pixel_array = clahe.apply(pixels)
+    pixel_array = pixels # Skipping CLAHE for now, as it can introduce variability in tests. We can add it back later if needed.
 
     # 3. Normalize the enhanced image down to 8-bit safely
     pixels = np.empty(pixel_array.shape, dtype=np.uint8)
@@ -112,6 +123,10 @@ def _resize_with_padding(image: np.ndarray, target_size: int) -> np.ndarray:
     
     return padded
 
+def _resize_image_strictly(image: np.ndarray, target_size: int) -> np.ndarray:
+    """Strictly squashes/stretches the image. No padding."""
+    return cv2.resize(image, (target_size, target_size), interpolation=cv2.INTER_AREA)
+
 def _create_xrv_tensor(image: np.ndarray) -> torch.Tensor:
     """
     Creates a preprocessed tensor for the TorchXRayVision model from a base image.
@@ -123,6 +138,7 @@ def _create_xrv_tensor(image: np.ndarray) -> torch.Tensor:
     normalized = xrv.datasets.normalize(image, 255)
     
     tensor = torch.from_numpy(normalized).unsqueeze(0)
+    
     return tensor.unsqueeze(0) # Add batch dimension
 
 def _create_cxas_tensor(image: np.ndarray) -> torch.Tensor:
@@ -143,8 +159,7 @@ def _create_cxas_tensor(image: np.ndarray) -> torch.Tensor:
     normalized_tensor = (tensor - IMAGENET_MEAN) / IMAGENET_STD
     
     return normalized_tensor.unsqueeze(0) # Add batch dimension
-
-
+    
 # --- Main Orchestrator Function ---
 def preprocess_image(image_path: Path) -> dict:
     """
@@ -162,11 +177,12 @@ def preprocess_image(image_path: Path) -> dict:
     # Load the image:
     pixels, metadata = _load_dicom_image(image_path) if is_dicom(image_path) else _load_pil_image(image_path)
 
-    padded_image = _resize_with_padding(pixels, target_size=TARGET_SIZE)
+    #padded_image = _resize_with_padding(pixels, target_size=TARGET_SIZE)
+    resized_image = _resize_image_strictly(pixels, target_size=TARGET_SIZE)
 
     return {
-        KEY_XRV_TENSOR: _create_xrv_tensor(padded_image),
-        KEY_CXAS_TENSOR: _create_cxas_tensor(padded_image),
-        KEY_METADATA: metadata,
-        KEY_ORIGINAL_SHAPE: pixels.shape
+        KEY_BASE_IMAGE: pixels,
+        KEY_XRV_TENSOR: _create_xrv_tensor(resized_image),
+        KEY_CXAS_TENSOR: _create_cxas_tensor(resized_image),
+        KEY_METADATA: metadata
     }

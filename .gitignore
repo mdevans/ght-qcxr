@@ -19,6 +19,7 @@ cxr/padchest
 *.dcm
 *.dicom
 *.jpg
+*.png
 data/*
 
 # --- Mac System Files ---

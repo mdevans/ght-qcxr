@@ -1,4 +1,9 @@
 {
     "python.defaultInterpreterPath": "./.venv/bin/python",
-    "python.analysis.typeCheckingMode": "basic"
+    "python.analysis.typeCheckingMode": "basic",
+    "python.testing.pytestArgs": [
+        "tests",
+        "-s"
+    ],
+
 }
