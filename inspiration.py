@@ -1,4 +1,38 @@
 import numpy as np
+import cv2
+
+# ==========================================
+# --- INSPIRATION THRESHOLDS & CONSTANTS ---
+# ==========================================
+
+# --- Skeletal Engine (Ribs) ---
+THRESHOLD_RIB_VISIBILITY: float = 0.75  # % of rib that must be clear of diaphragm mask
+THRESHOLD_MAX_RIB_GAP: int = 2          # Max numerical jump between valid rib indices
+THRESHOLD_MIN_RELIABLE_RIBS: int = 5    # Minimum trusted segments required for reliable skeletal vote
+SKELETAL_GAP_WARNING_THRESHOLD: int = 2 # Missing ribs count that triggers a reasoning warning
+
+# --- Structural Trust (Integrity) ---
+# A rib must span at least this % of the Right Lung's width to be trusted.
+THRESHOLD_MIN_RIB_WIDTH_RATIO: float = 0.35
+# Ribs 1-3 (Proximal) are anatomically smaller; we apply this leniency multiplier.
+RIB_PROXIMAL_LENIENCY_MULTIPLIER: float = 0.6
+INDEX_PROXIMAL_END: int = 3
+
+# --- Projection-Aware Expansion Levels (Rib Count) ---
+PA_EXPANSION_POOR_THRESHOLD: int = 9
+PA_EXPANSION_OVER_THRESHOLD: int = 10
+AP_EXPANSION_POOR_THRESHOLD: int = 7
+AP_EXPANSION_OVER_THRESHOLD: int = 9
+
+# --- Geometric Thresholds (Lung Field Aspect Ratio H/W) ---
+ASPECT_RATIO_POOR_EXPANSION: float = 0.85
+ASPECT_RATIO_OVER_EXPANSION: float = 1.05
+
+# --- Anatomic Sanity Constraints ---
+MIN_REQUIRED_LUNG_AREA_RATIO: float = 0.15   # Lungs must occupy > 15% of image
+MIN_DIAPHRAGM_HEIGHT_RATIO: float = 0.30     # Diaphragm dome cannot be in top 30% of image
+
+# ==========================================
 
 class InspirationClass:
     POOR = "reject_poor"
@@ -11,21 +45,18 @@ class InspirationClass:
 # ==========================================
 
 def passes_anatomic_sanity(segment_masks: dict[str, np.ndarray], img_shape: tuple[int, int]) -> tuple[bool, str]:
-    """Validates that the inspiration algorithm relevant segments obey fundamental human geometry before doing math."""
+    """Validates fundamental human geometry before performing QA math."""
     h, w = img_shape[:2]
     
-    # Check 1: Do we have a diaphragm?
     diaphragm = segment_masks.get("Diaphragm_Full")
     if diaphragm is None or diaphragm.max() == 0:
         return False, "Sanity Failure: Diaphragm_Full mask is missing or empty."
         
-    # Check 2: Is the diaphragm physically in the bottom half of the image?
     y_coords, _ = np.where(diaphragm > 0)
     dome_y = int(np.min(y_coords))
-    if dome_y < (h * 0.30):
-        return False, f"Sanity Failure: Diaphragm dome (y={dome_y}) is impossibly high in the chest cavity."
+    if dome_y < (h * MIN_DIAPHRAGM_HEIGHT_RATIO):
+        return False, f"Sanity Failure: Diaphragm dome (y={dome_y}) is too high."
 
-    # Check 3: Do we have sufficient lung tissue?
     r_lung = segment_masks.get("Lung_Right")
     l_lung = segment_masks.get("Lung_Left")
     valid_lungs = [m for m in (r_lung, l_lung) if m is not None and m.max() > 0]
@@ -34,8 +65,8 @@ def passes_anatomic_sanity(segment_masks: dict[str, np.ndarray], img_shape: tupl
         return False, "Sanity Failure: No lung masks detected."
         
     total_lung_area = sum(np.sum(m > 0) for m in valid_lungs)
-    if total_lung_area < (h * w * 0.15): # Lungs must take up at least 15% of the image
-        return False, f"Sanity Failure: Total lung area is impossibly small ({total_lung_area} px)."
+    if total_lung_area < (h * w * MIN_REQUIRED_LUNG_AREA_RATIO):
+        return False, "Sanity Failure: Total lung area is impossibly small."
 
     return True, "Passed"
 
@@ -48,42 +79,71 @@ def get_diaphragm_dome_y(diaphragm_mask: np.ndarray) -> int:
     y_coords, _ = np.where(diaphragm_mask > 0)
     return int(np.min(y_coords)) if len(y_coords) > 0 else 0
 
-def calculate_lowest_visible_rib(blended_dict: dict[str, np.ndarray], dome_y: int, threshold: float = 0.75) -> tuple[int, bool]:
-    """
-    Returns the index (1-12) of the lowest right posterior rib that is primarily 
-    above the diaphragm. Returns a boolean indicating if tracking was reliable.
-    """
-    highest_idx = 0
-    valid_ribs_found = 0
+def is_rib_structurally_sound(rib_mask: np.ndarray, lung_w: int, rib_index: int) -> bool:
+    """Verifies rib dimensions relative to lung width to filter DL hallucinations."""
+    if lung_w <= 0: return False
+    
+    _, _, rib_w, _ = cv2.boundingRect((rib_mask > 0).astype(np.uint8))
+    
+    # Apply anatomical leniency for proximal ribs
+    multiplier = RIB_PROXIMAL_LENIENCY_MULTIPLIER if rib_index <= INDEX_PROXIMAL_END else 1.0
+    required_width = lung_w * THRESHOLD_MIN_RIB_WIDTH_RATIO * multiplier
+    
+    return rib_w >= required_width
+
+def calculate_lowest_visible_rib(
+    blended_dict: dict[str, np.ndarray], 
+    diaphragm_mask: np.ndarray, 
+    img_shape: tuple[int, int],
+    threshold: float = THRESHOLD_RIB_VISIBILITY
+) -> tuple[int, bool, int]:
+    """Determines expansion level via 2D anatomical overlap with the diaphragm."""
+    lowest_idx = 0
+    trusted_count = 0
+    
+    r_lung = blended_dict.get("Lung_Right")
+    lung_w = 0
+    if r_lung is not None and r_lung.max() > 0:
+        _, _, lung_w, _ = cv2.boundingRect((r_lung > 0).astype(np.uint8))
     
     for i in range(1, 13):
         rib_mask = blended_dict.get(f"Posterior_Rib_{i}_Right")
         if rib_mask is None or rib_mask.max() == 0:
             continue
             
-        valid_ribs_found += 1
-        y_coords, _ = np.where(rib_mask > 0)
+        if not is_rib_structurally_sound(rib_mask, lung_w, i):
+            continue
+            
+        trusted_count += 1
         
-        # Count pixels above the dome (smaller Y values)
-        pixels_above_dome = np.sum(y_coords < dome_y)
-        visibility_ratio = pixels_above_dome / len(y_coords)
+        # Guard against broadcasting errors in heterogeneous mask environments
+        if rib_mask.shape != diaphragm_mask.shape:
+             curr_rib = cv2.resize(rib_mask, (diaphragm_mask.shape[1], diaphragm_mask.shape[0]))
+        else:
+             curr_rib = rib_mask
+
+        rib_pixels_total = np.sum(curr_rib > 0)
+        # Visible = Rib pixels not masked by 2D diaphragm anatomy
+        visible_mask = np.logical_and(curr_rib > 0, diaphragm_mask == 0)
+        pixels_visible = np.sum(visible_mask)
+        
+        visibility_ratio = pixels_visible / rib_pixels_total if rib_pixels_total > 0 else 0
         
         if visibility_ratio >= threshold:
-            highest_idx = max(highest_idx, i)
+            if lowest_idx == 0 or (i - lowest_idx) <= THRESHOLD_MAX_RIB_GAP:
+                lowest_idx = i
             
-    # Reliability constraint: CXAS must have successfully mapped at least 5 right ribs
-    is_reliable = valid_ribs_found >= 5
-    return highest_idx, is_reliable
+    is_reliable = trusted_count >= THRESHOLD_MIN_RELIABLE_RIBS
+    return lowest_idx, is_reliable, trusted_count
 
 # ==========================================
 # 3. ENGINE B: GEOMETRIC VALIDATOR (Lungs)
 # ==========================================
 
 def calculate_lung_aspect_ratio(segment_masks: dict[str, np.ndarray]) -> float:
-    """Calculates Max Height / Max Width of the combined lung bounding box."""
-    r_lung = segment_masks.get("Lung_Right")
-    l_lung = segment_masks.get("Lung_Left")
-    valid_lungs = [m for m in (r_lung, l_lung) if m is not None]
+    """Measures Height / Width of the combined lung field bounding box."""
+    r_lung, l_lung = segment_masks.get("Lung_Right"), segment_masks.get("Lung_Left")
+    valid_lungs = [m for m in (r_lung, l_lung) if m is not None and m.max() > 0]
     
     if not valid_lungs:
         return 0.0
@@ -104,52 +164,39 @@ def calculate_lung_aspect_ratio(segment_masks: dict[str, np.ndarray]) -> float:
 # ==========================================
 
 def assess_inspiration(segment_masks: dict[str, np.ndarray], img_shape: tuple[int, int], projection: str = "PA") -> dict:
-    """Dual-Engine evaluation of radiographic inspiration."""
-    
-    # 1. Anatomic Sanity Gate
+    """Ensemble assessment using Skeletal and Geometric engines."""
     is_sane, sanity_msg = passes_anatomic_sanity(segment_masks, img_shape)
     if not is_sane:
-        return {
-            "status": InspirationClass.ERROR,
-            "metrics": {},
-            "reasoning": sanity_msg
-        }
+        return {"status": InspirationClass.ERROR, "metrics": {}, "reasoning": sanity_msg}
 
-    # 2. Execute Engines
-    dome_y = get_diaphragm_dome_y(segment_masks["Diaphragm_Full"])
-    rib_level, skeletal_reliable = calculate_lowest_visible_rib(segment_masks, dome_y)
+    diaphragm_mask = segment_masks["Diaphragm_Full"]
+    rib_level, skeletal_reliable, trusted_count = calculate_lowest_visible_rib(
+        segment_masks, diaphragm_mask, img_shape
+    )
     aspect_ratio = calculate_lung_aspect_ratio(segment_masks)
 
-    # 3. Projection-Aware Thresholds
-    if projection == "PA":
-        poor_rib_thresh = 9
-        over_rib_thresh = 10
-    else: # AP Projection (Supine / Portable)
-        poor_rib_thresh = 7
-        over_rib_thresh = 9
+    # Threshold Mapping
+    poor_rib_thresh = PA_EXPANSION_POOR_THRESHOLD if projection == "PA" else AP_EXPANSION_POOR_THRESHOLD
+    over_rib_thresh = PA_EXPANSION_OVER_THRESHOLD if projection == "PA" else AP_EXPANSION_OVER_THRESHOLD
 
-    # Geometric Thresholds (Highly stable, scale-invariant)
-    poor_aspect_thresh = 0.85 # Short and wide
-    over_aspect_thresh = 1.05 # Long and narrow
-
-    # 4. Ensemble Voting Logic
     status = InspirationClass.NORMAL
     reasoning = []
 
-    # If Skeletal tracking failed completely, rely entirely on Geometry
+    # Detection Gaps
+    missing_rib_gap = rib_level - trusted_count
+    if skeletal_reliable and missing_rib_gap >= SKELETAL_GAP_WARNING_THRESHOLD:
+        reasoning.append(f"Note: Skeletal gaps detected ({missing_rib_gap} ribs missing/fragmented).")
+
     if not skeletal_reliable:
-        reasoning.append(f"Skeletal tracking unstable (found fewer than 5 right ribs). Falling back to geometric analysis.")
-        if aspect_ratio < poor_aspect_thresh:
+        reasoning.append(f"Skeletal tracking unstable (found only {trusted_count} trusted right ribs).")
+        if aspect_ratio < ASPECT_RATIO_POOR_EXPANSION:
             status = InspirationClass.POOR
-            reasoning.append(f"Lung Aspect Ratio ({aspect_ratio:.2f}) indicates poor vertical expansion.")
-        elif aspect_ratio > over_aspect_thresh:
+            reasoning.append(f"Lung Aspect Ratio ({aspect_ratio:.2f}) indicates poor expansion.")
+        elif aspect_ratio > ASPECT_RATIO_OVER_EXPANSION:
             status = InspirationClass.OVER
-            reasoning.append(f"Lung Aspect Ratio ({aspect_ratio:.2f}) indicates abnormal hyperinflation.")
-        else:
-            reasoning.append(f"Lung Aspect Ratio ({aspect_ratio:.2f}) indicates normal expansion.")
-            
-    # Standard Dual-Engine Voting
+            reasoning.append(f"Lung Aspect Ratio ({aspect_ratio:.2f}) indicates hyperinflation.")
     else:
+        # Standard Consensus logic
         skeletal_vote = InspirationClass.NORMAL
         if rib_level < poor_rib_thresh:
             skeletal_vote = InspirationClass.POOR
@@ -157,40 +204,31 @@ def assess_inspiration(segment_masks: dict[str, np.ndarray], img_shape: tuple[in
             skeletal_vote = InspirationClass.OVER
             
         geometric_vote = InspirationClass.NORMAL
-        if aspect_ratio < poor_aspect_thresh:
+        if aspect_ratio < ASPECT_RATIO_POOR_EXPANSION:
             geometric_vote = InspirationClass.POOR
-        elif aspect_ratio > over_aspect_thresh:
+        elif aspect_ratio > ASPECT_RATIO_OVER_EXPANSION:
             geometric_vote = InspirationClass.OVER
 
-        # Consensus Matrix
         if skeletal_vote == geometric_vote:
             status = skeletal_vote
-            if status == InspirationClass.NORMAL:
-                reasoning.append(f"Adequate {projection} inspiration. {rib_level} posterior ribs visible. Normal lung geometry.")
-            else:
-                reasoning.append(f"Unanimous {status.upper()}: {rib_level} ribs visible with supporting aspect ratio of {aspect_ratio:.2f}.")
-        
-        # Conflict: Ribs say Normal, but Lungs are massively hyperinflated (Pathology Catch)
+            reasoning.append(f"Unanimous {status.upper()}: Expansion level {rib_level}, Ratio {aspect_ratio:.2f}.")
         elif skeletal_vote == InspirationClass.NORMAL and geometric_vote == InspirationClass.OVER:
             status = InspirationClass.OVER
-            reasoning.append(f"WARNING: Rib count is normal ({rib_level}), but lung aspect ratio ({aspect_ratio:.2f}) suggests severe structural hyperinflation (e.g., COPD).")
-            
-        # Conflict: Ribs say Poor, but Lungs look normally expanded
+            reasoning.append(f"Hyperinflation suspected: Normal expansion ({rib_level}) but high ratio ({aspect_ratio:.2f}).")
         elif skeletal_vote == InspirationClass.POOR and geometric_vote == InspirationClass.NORMAL:
             status = InspirationClass.NORMAL
-            reasoning.append(f"Rib count is low ({rib_level}), but normal lung geometry ({aspect_ratio:.2f}) overrides, confirming adequate volumetric expansion.")
-            
+            reasoning.append(f"Low expansion level ({rib_level}) overridden by normal lung geometry ({aspect_ratio:.2f}).")
         else:
-            # Fallback for complex conflicts: Trust the ribs if we are confident
             status = skeletal_vote
-            reasoning.append(f"Metrics conflict (Ribs: {rib_level}, Aspect: {aspect_ratio:.2f}). Defaulting to skeletal standard.")
+            reasoning.append(f"Conflict: Ribs ({rib_level}) vs Geometry ({aspect_ratio:.2f}). Defaulting to Skeletal.")
 
     return {
         "status": status,
         "metrics": {
             "projection": projection,
-            "diaphragm_dome_y": dome_y,
-            "lowest_visible_rib": rib_level,
+            "diaphragm_dome_y": get_diaphragm_dome_y(diaphragm_mask),
+            "expansion_level_rib": rib_level,
+            "trusted_rib_count": trusted_count,
             "skeletal_reliable": skeletal_reliable,
             "lung_aspect_ratio": aspect_ratio
         },

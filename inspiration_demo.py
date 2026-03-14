@@ -1,6 +1,7 @@
 import cv2
 import numpy as np
 from pathlib import Path
+from PIL import ImageColor
 
 # AI Pipeline Imports
 from segment import load_cxas_model, load_xrv_model, predict_cxas, predict_xrv, resize_mask_back_to_orig, DEVICE
@@ -15,112 +16,108 @@ from inspiration import assess_inspiration
 OUTPUT_DIR = Path("demo_output/inspiration")
 OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
+# --- VISUALIZATION CONSTANTS ---
+def get_bgr(color_name: str) -> tuple[int, int, int]:
+    """Converts a standard W3C color name to a strictly typed BGR 3-tuple for OpenCV."""
+    r, g, b = ImageColor.getrgb(color_name)[:3]
+    return b, g, r
+
+COLOR_TEXT_MAIN     = get_bgr("white")
+COLOR_DIAPHRAGM     = get_bgr("orange")
+COLOR_LUNG_OUTLINE  = get_bgr("blue")
+COLOR_BBOX          = get_bgr("cyan")
+COLOR_RIB_VALID     = get_bgr("lime")
+COLOR_RIB_INVALID   = get_bgr("yellow")
+COLOR_DOME_LINE     = get_bgr("red")
+
+# Text & Line Spacing Ratios (relative to scale_factor)
+TEXT_PAD_X_RATIO = 20
+TEXT_PAD_Y_RATIO = 30
+LINE_STEP_MAIN_RATIO = 35
+LINE_STEP_SUB_RATIO = 25
+BOTTOM_REASONING_PAD_Y_RATIO = 10
+
+# Blend opacity for the mask layer
+BLEND_OPACITY = 0.3
+
 def draw_inspiration_overlay(base_img: np.ndarray, blended_dict: dict, metrics: dict, reasoning: str) -> np.ndarray:
-    """Draws a specialized clinical overlay showing exactly how the AI calculated Inspiration."""
+    """Refined visualization focusing on 2D anatomical expansion."""
     if len(base_img.shape) == 2:
         overlay = cv2.cvtColor(base_img, cv2.COLOR_GRAY2BGR)
     else:
         overlay = base_img.copy()
         
     h, w = overlay.shape[:2]
-    
-    # --- DYNAMIC SCALING MATH ---
     scale_factor = max(0.5, h / 1000.0)
-    font_scale_main = 0.8 * scale_factor
-    font_scale_sub = 0.6 * scale_factor
-    thick_line = max(1, int(2 * scale_factor))
-    thick_text = max(1, int(2 * scale_factor)) 
-    pad_x = int(20 * scale_factor)
-    pad_y = int(30 * scale_factor)
-    line_step_main = int(35 * scale_factor)
-    line_step_sub = int(25 * scale_factor)
+    
+    # Scaling setup
+    font_scale_main, font_scale_sub = 0.8 * scale_factor, 0.6 * scale_factor
+    thick_line, thick_text = max(1, int(2 * scale_factor)), max(1, int(2 * scale_factor)) 
+    pad_x, pad_y = int(TEXT_PAD_X_RATIO * scale_factor), int(TEXT_PAD_Y_RATIO * scale_factor)
+    line_step_main, line_step_sub = int(LINE_STEP_MAIN_RATIO * scale_factor), int(LINE_STEP_SUB_RATIO * scale_factor)
     
     mask_layer = np.zeros_like(overlay)
     
     # 1. Draw Diaphragm (Orange)
     diaphragm = blended_dict.get("Diaphragm_Full")
     if diaphragm is not None:
-        mask_layer[diaphragm > 0] = [0, 165, 255] # BGR Orange
+        mask_layer[diaphragm > 0] = COLOR_DIAPHRAGM
 
-    # 2. Draw Lungs & Bounding Box
-    lung_r = blended_dict.get("Lung_Right")
-    lung_l = blended_dict.get("Lung_Left")
-    
+    # 2. Draw Lungs (Blue) & Bounding Box (Cyan)
+    lung_r, lung_l = blended_dict.get("Lung_Right"), blended_dict.get("Lung_Left")
     combined_lungs = np.zeros((h, w), dtype=np.uint8)
-    
     for lung in [lung_r, lung_l]:
         if lung is not None and lung.max() > 0:
             combined_lungs = np.logical_or(combined_lungs, lung > 0).astype(np.uint8)
             contours, _ = cv2.findContours(lung, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
-            cv2.drawContours(overlay, contours, -1, (255, 0, 0), thick_line) # Blue outline
+            cv2.drawContours(overlay, contours, -1, COLOR_LUNG_OUTLINE, thick_line)
 
-    # --- NEW: ASPECT RATIO BOUNDING BOX (Cyan) ---
     if combined_lungs.max() > 0:
-        # Get the strict geometric box encompassing BOTH lungs
-        x, y, box_w, box_h = cv2.boundingRect(combined_lungs)
-        
-        # Draw the bounding box
-        cv2.rectangle(overlay, (x, y), (x + box_w, y + box_h), (255, 255, 0), thick_line)
-        
-        # Draw CAD-style measurement axes (Crosshairs through the center of the box)
-        center_x = x + (box_w // 2)
-        center_y = y + (box_h // 2)
-        
-        # Vertical height line
-        cv2.line(overlay, (center_x, y), (center_x, y + box_h), (255, 255, 0), thick_line, cv2.LINE_AA)
-        # Horizontal width line
-        cv2.line(overlay, (x, center_y), (x + box_w, center_y), (255, 255, 0), thick_line, cv2.LINE_AA)
-        
-        # Label the axes
-        cv2.putText(overlay, f"W", (x + 10, center_y - 10), cv2.FONT_HERSHEY_SIMPLEX, font_scale_main, (255, 255, 0), thick_text, cv2.LINE_AA)
-        cv2.putText(overlay, f"H", (center_x + 10, y + 30), cv2.FONT_HERSHEY_SIMPLEX, font_scale_main, (255, 255, 0), thick_text, cv2.LINE_AA)
+        bx, by, bw, bh = cv2.boundingRect(combined_lungs)
+        cv2.rectangle(overlay, (bx, by), (bx + bw, by + bh), COLOR_BBOX, thick_line)
+        # Centerlines
+        cv2.line(overlay, (bx + bw//2, by), (bx + bw//2, by + bh), COLOR_BBOX, thick_line, cv2.LINE_AA)
+        cv2.line(overlay, (bx, by + bh//2), (bx + bw, by + bh//2), COLOR_BBOX, thick_line, cv2.LINE_AA)
 
-    # 3. Draw Ribs (Green = Counted, Yellow = Below Dome/Ignored)
-    lowest_rib = metrics.get("lowest_visible_rib", 0)
+    # 3. Draw Ribs (Lime if Expansion Level, Yellow if masked by diaphragm)
+    lowest_rib = metrics.get("expansion_level_rib", 0)
     for i in range(1, 13):
         rib = blended_dict.get(f"Posterior_Rib_{i}_Right")
         if rib is not None and rib.max() > 0:
-            if i <= lowest_rib:
-                mask_layer[rib > 0] = [0, 255, 0]     # Green
-            else:
-                mask_layer[rib > 0] = [0, 255, 255]   # Yellow
+            color = COLOR_RIB_VALID if i <= lowest_rib else COLOR_RIB_INVALID
+            mask_layer[rib > 0] = color
 
-    # 4. Blend the mask layer (30% opacity)
-    cv2.addWeighted(mask_layer, 0.3, overlay, 0.7, 0, overlay)
+    # 4. Final Blend
+    cv2.addWeighted(mask_layer, BLEND_OPACITY, overlay, 1 - BLEND_OPACITY, 0, overlay)
 
-    # 5. Draw the Diaphragm Dome "Finish Line" (Red)
-    dome_y = metrics.get("diaphragm_dome_y", 0)
-    if dome_y > 0:
-        cv2.line(overlay, (0, dome_y), (w, dome_y), (0, 0, 255), thick_line, cv2.LINE_AA)
-
-    # 6. Draw Metrics Text Box (Pure White)
+    # 5. Clean Metrics Box
     text_lines = [
-        f"Dome Y: {dome_y}",
-        f"Lowest Visible Rib: {lowest_rib}",
-        f"Aspect Ratio (H/W): {metrics.get('lung_aspect_ratio', 0):.2f}",
+        f"Expansion Level (Rib): {metrics.get('expansion_level_rib', 0)}",
+        f"Trusted Ribs: {metrics.get('trusted_rib_count', 0)}/12",
+        f"Lung Aspect Ratio: {metrics.get('lung_aspect_ratio', 0):.2f}",
         f"Status: {metrics.get('status', 'ERROR').upper()}"
     ]
     
-    y_offset = pad_y
+    y_off = pad_y
     for line in text_lines:
-        cv2.putText(overlay, line, (pad_x, y_offset), cv2.FONT_HERSHEY_SIMPLEX, font_scale_main, (255, 255, 255), thick_text, cv2.LINE_AA)
-        y_offset += line_step_main
+        cv2.putText(overlay, line, (pad_x, y_off), cv2.FONT_HERSHEY_SIMPLEX, font_scale_main, COLOR_TEXT_MAIN, thick_text, cv2.LINE_AA)
+        y_off += line_step_main
         
-    # Wrap and draw reasoning at the bottom (Pure White)
-    reasoning_words = reasoning.split(" ")
-    lines, current_line = [], []
-    for word in reasoning_words:
-        current_line.append(word)
-        char_limit = int(60 * (w / 1000.0) / max(0.5, scale_factor)) 
-        if len(" ".join(current_line)) > char_limit:
-            lines.append(" ".join(current_line[:-1]))
-            current_line = [word]
-    lines.append(" ".join(current_line))
+    # Text Wrapping for reasoning
+    max_w = w - (2 * pad_x)
+    wrapped = []
+    curr = ""
+    for word in reasoning.split(" "):
+        test = f"{curr} {word}".strip()
+        if cv2.getTextSize(test, cv2.FONT_HERSHEY_SIMPLEX, font_scale_sub, thick_text)[0][0] > max_w:
+            wrapped.append(curr); curr = word
+        else: curr = test
+    if curr: wrapped.append(curr)
     
-    y_offset = h - (len(lines) * line_step_sub) - int(10 * scale_factor)
-    for line in lines:
-        cv2.putText(overlay, line, (pad_x, y_offset), cv2.FONT_HERSHEY_SIMPLEX, font_scale_sub, (255, 255, 255), thick_text, cv2.LINE_AA)
-        y_offset += line_step_sub
+    y_off = h - (len(wrapped) * line_step_sub) - int(BOTTOM_REASONING_PAD_Y_RATIO * scale_factor)
+    for line in wrapped:
+        cv2.putText(overlay, line, (pad_x, y_off), cv2.FONT_HERSHEY_SIMPLEX, font_scale_sub, COLOR_TEXT_MAIN, thick_text, cv2.LINE_AA)
+        y_off += line_step_sub
 
     return overlay
 
@@ -171,7 +168,6 @@ def main():
             )
             
             # --- EXTENSION FIX ---
-            # Grab the suffix without the dot (e.g., 'dcm' or 'jpg')
             orig_ext = img_path.suffix[1:] 
             out_path = OUTPUT_DIR / f"insp_{img_path.stem}_{orig_ext}.png"
             
