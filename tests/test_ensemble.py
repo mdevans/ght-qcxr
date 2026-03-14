@@ -15,12 +15,45 @@ from ensemble import (
     apply_merge_strategy,
     blend_patient_masks,
     generate_preview_overlay,
-    ANATOMY_RECIPES
+    ANATOMY_RECIPES,
+    _keep_top_n_segments # Imported the private filter for atomic testing
 )
 
 # ==========================================
 # 1. ATOMIC MATH TESTS (Pure boolean logic & Exceptions)
 # ==========================================
+
+def test_keep_top_n_segments_hallucination_filter():
+    """Proves the hallucination scrubber correctly isolates the largest blobs and deletes noise."""
+    mask = np.zeros((100, 100), dtype=np.uint8)
+    
+    # Blob 1: TRUE ANATOMY (Large: 10x10 = 100 pixels)
+    mask[10:20, 10:20] = 1
+    # Blob 2: HALLUCINATION 1 (Medium: 5x5 = 25 pixels)
+    mask[30:35, 30:35] = 1
+    # Blob 3: HALLUCINATION 2 (Small: 2x2 = 4 pixels)
+    mask[50:52, 50:52] = 1
+
+    # Baseline check: Total pixels initially = 129
+    assert np.sum(mask) == 129
+
+    # TEST A: Keep Top 1 (e.g., A standard Lung or Heart)
+    clean_1 = _keep_top_n_segments(mask, max_segments=1)
+    assert np.sum(clean_1) == 100 # Only the 100-pixel blob should survive
+    assert clean_1[15, 15] == 1   # Large remains
+    assert clean_1[32, 32] == 0   # Medium is deleted
+    assert clean_1[51, 51] == 0   # Small is deleted
+
+    # TEST B: Keep Top 2 (e.g., The Diaphragm)
+    clean_2 = _keep_top_n_segments(mask, max_segments=2)
+    assert np.sum(clean_2) == 125 # The 100-pixel and 25-pixel blobs survive
+    assert clean_2[15, 15] == 1   # Large remains
+    assert clean_2[32, 32] == 1   # Medium remains
+    assert clean_2[51, 51] == 0   # Small is deleted
+
+    # TEST C: Bypass Filter (max_segments = 0)
+    clean_0 = _keep_top_n_segments(mask, max_segments=0)
+    assert np.sum(clean_0) == 129 # All pixels remain unharmed
 
 def test_strategy_math_logic():
     """Proves the mathematical merging strategies work correctly at a pixel level."""
@@ -59,7 +92,7 @@ def test_strategy_exceptions():
         apply_merge_strategy(dummy_mask, None, Strategy.INTERSECTION)
 
 def test_derived_diaphragm_full():
-    """Proves the ensemble successfully synthesizes the Diaphragm_Full mask from available parts."""
+    """Proves the ensemble synthesizes the Diaphragm_Full mask while respecting expected segment limits."""
     # Create fake 512x512 masks for the sub-components
     cxas_dict = {
         "class_106": np.zeros((512, 512), dtype=np.uint8), # Left Diaphragm
@@ -69,20 +102,26 @@ def test_derived_diaphragm_full():
         "Facies_Diaphragmatica": np.zeros((512, 512), dtype=np.uint8) # XRV Diaphragm
     }
     
-    # Draw non-overlapping squares to represent the three parts
+    # Draw Left Diaphragm
     cxas_dict["class_106"][10:20, 10:20] = 1
+    # Draw Right Diaphragm (Separate)
     cxas_dict["class_107"][30:40, 30:40] = 1
-    xrv_dict["Facies_Diaphragmatica"][50:60, 50:60] = 1
+    
+    # Draw XRV Diaphragm so it overlaps the Left Diaphragm
+    # This mathematically merges them into 1 contiguous blob. 
+    # Total blobs in the union will now be exactly 2 (Left+XRV, and Right)
+    xrv_dict["Facies_Diaphragmatica"][15:25, 15:25] = 1
     
     blended = blend_patient_masks(cxas_dict, xrv_dict)
     
     assert "Diaphragm_Full" in blended
     df = blended["Diaphragm_Full"]
     
-    # The Full Diaphragm should contain pixels from ALL THREE locations
-    assert df[15, 15] == 1 # Left is present
-    assert df[35, 35] == 1 # Right is present
-    assert df[55, 55] == 1 # XRV is present
+    # The Full Diaphragm should safely contain pixels from ALL THREE sources 
+    # because the filter (expected_segments=2) allowed the 2 combined blobs to survive.
+    assert df[12, 12] == 1 # Pure Left pixel survived
+    assert df[35, 35] == 1 # Pure Right pixel survived
+    assert df[22, 22] == 1 # Pure XRV pixel survived
 
 # ==========================================
 # 2. REAL CLINICAL DATA: IN-MEMORY BLENDING
