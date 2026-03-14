@@ -27,14 +27,14 @@ TARGET_SIZE = 448
 # }
 
 TEST_DIRS = {
-    # "CheXPert_Valid_Frontal": {
-    #     "path": "data/CheXpert-v1/valid/frontal",
-    #     "expected": "CXR_FRONTAL"
-    # },
-    # "CheXPert_Valid_Lateral": {
-    #     "path": "data/CheXpert-v1/valid/lateral",
-    #     "expected": "CXR_LATERAL"
-    # },
+    "CheXPert_Valid_Frontal": {
+        "path": "data/CheXpert-v1/valid/frontal",
+        "expected": "CXR_FRONTAL"
+    },
+    "CheXPert_Valid_Lateral": {
+        "path": "data/CheXpert-v1/valid/lateral",
+        "expected": "CXR_LATERAL"
+    },
     "Other": {
         "path": "data/other",
         "expected": "OTHER"
@@ -206,3 +206,52 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+"""
+🧪 Production Classifier Test v2 (Letterbox) (mps)
+Loading weights: 100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 888/888 [00:00<00:00, 3869.06it/s, Materializing param=vision_model.post_layernorm.weight]
+✅ Models Loaded Successfully
+Testing CheXPert_Valid_Frontal (CXR_FRONTAL)... ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 100% 0:01:37
+Testing CheXPert_Valid_Lateral (CXR_LATERAL)... ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 100% 0:00:15
+Testing Other (OTHER)... ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 100% 0:00:39
+                            Production Test Results (Letterbox)                            
+┏━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━┳━━━━━━━━┓
+┃ Source                 ┃ File                           ┃ Prediction  ┃   Conf ┃ Result ┃
+┡━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━╇━━━━━━━━╇━━━━━━━━┩
+│ CheXPert_Valid_Frontal │ patient64738_study1_view1_fron │ CXR_FRONTAL │  96.9% │  PASS  │
+│ CheXPert_Valid_Frontal │ patient64653_study1_view1_fron │ CXR_FRONTAL │  85.8% │  PASS  │
+│ CheXPert_Valid_Frontal │ patient64664_study1_view1_fron │ CXR_FRONTAL │  89.8% │  PASS  │
+│ CheXPert_Valid_Frontal │ patient64581_study1_view1_fron │ CXR_FRONTAL │  95.6% │  PASS  │
+│ CheXPert_Valid_Frontal │ patient64639_study1_view1_fron │ CXR_FRONTAL │  78.2% │  PASS  │
+│ CheXPert_Valid_Frontal │ patient64660_study1_view1_fron │ CXR_FRONTAL │  94.8% │  PASS  │
+│ CheXPert_Valid_Frontal │ patient64657_study1_view1_fron │ CXR_FRONTAL │  72.0% │  PASS  │
+│ CheXPert_Valid_Frontal │ patient64585_study1_view1_fron │ CXR_FRONTAL │  97.6% │  PASS  │
+│ CheXPert_Valid_Frontal │ patient64558_study1_view1_fron │ CXR_FRONTAL │  99.8% │  PASS  │
+│ CheXPert_Valid_Frontal │ patient64693_study1_view1_fron │ OTHER       │  55.2% │  FAIL  │
+│ CheXPert_Valid_Lateral │ patient64676_study1_view2_late │ CXR_LATERAL │  98.2% │  PASS  │
+│ CheXPert_Valid_Lateral │ patient64618_study1_view2_late │ CXR_LATERAL │  99.1% │  PASS  │
+│ CheXPert_Valid_Lateral │ patient64597_study1_view2_late │ CXR_LATERAL │  96.3% │  PASS  │
+│ CheXPert_Valid_Lateral │ patient64575_study1_view2_late │ CXR_LATERAL │  97.2% │  PASS  │
+│ CheXPert_Valid_Lateral │ patient64542_study1_view2_late │ CXR_LATERAL │  98.5% │  PASS  │
+│ CheXPert_Valid_Lateral │ patient64558_study1_view2_late │ CXR_LATERAL │  98.4% │  PASS  │
+│ CheXPert_Valid_Lateral │ patient64589_study1_view2_late │ CXR_LATERAL │  98.6% │  PASS  │
+│ CheXPert_Valid_Lateral │ patient64606_study1_view2_late │ CXR_LATERAL │  95.3% │  PASS  │
+│ CheXPert_Valid_Lateral │ patient64567_study1_view2_late │ CXR_LATERAL │  98.0% │  PASS  │
+│ Other                  │ medmnist_organamnist_17.jpg    │ OTHER       │ 100.0% │  PASS  │
+│ Other                  │ medmnist_organamnist_16.jpg    │ OTHER       │  99.9% │  PASS  │
+│ Other                  │ medmnist_organamnist_14.jpg    │ OTHER       │  99.8% │  PASS  │
+│ Other                  │ medmnist_organamnist_28.jpg    │ OTHER       │  99.8% │  PASS  │
+│ Other                  │ natural_car.jpg                │ OTHER       │  99.3% │  PASS  │
+│ Other                  │ medmnist_organamnist_29.jpg    │ OTHER       │ 100.0% │  PASS  │
+│ Other                  │ medmnist_organamnist_15.jpg    │ OTHER       │  99.8% │  PASS  │
+│ Other                  │ medmnist_organamnist_39.jpg    │ OTHER       │ 100.0% │  PASS  │
+│ Other                  │ medmnist_organamnist_11.jpg    │ OTHER       │  99.8% │  PASS  │
+└────────────────────────┴────────────────────────────────┴─────────────┴────────┴────────┘
+
+Summary per Dataset:
+   CheXPert_Valid_Frontal: 201/202 (99.5%)
+   CheXPert_Valid_Lateral: 32/32 (100.0%)
+   Other: 81/81 (100.0%)
+
+Overall Accuracy: 314/315 (99.7%)
+"""
